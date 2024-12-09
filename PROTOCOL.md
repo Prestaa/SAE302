@@ -78,6 +78,7 @@ reponse,demande_ami,demandeur,receveur,ok
 
 si pas ok:
 - Demandeur/Receveur n'existe pas / est vide / contient une `,`
+- L'utilisateur a atteint le nombre maximal d'ami
 ```
 reponse,demande_ami,login,erreur
 ```

@@ -6,14 +6,22 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 
+import com.server.DAO.User;
+
+
+
 public class Server {
     private DatagramSocket socket;
     private DatagramPacket received;
     private DatagramPacket sent;
-    
+
+    private User[] users;
+    private int user_number = 0;
     private byte[] received_bytes;
     
-    public Server() {}
+    public Server() {
+        users = new User[10];
+    }
 
     public void run() throws SocketException, IOException {
         this.socket = new DatagramSocket(1337);
