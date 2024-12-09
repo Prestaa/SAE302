@@ -1,11 +1,6 @@
 # Aspect protocolaire
 
-<br><br>
-
-
 ## Inscription
-
-<br><br>
 
 ### Demande d'inscription
 
