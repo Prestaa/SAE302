@@ -40,6 +40,8 @@ public class Server {
             // On envoie au client
             send_message(to_send);
         }
+
+
     }
 
     public byte[] get_to_send_message(String message) {
@@ -63,8 +65,11 @@ public class Server {
                     to_send = "reponse,connexion,null,erreur\n";
                 }
                 break;
+            case "":
+                to_send = "\n";
+                break;
             default:
-                to_send = "Unrecognized command\n";
+                to_send = "reponse,null,null,erreur\n";
                 break;
         }
         leak_db();
@@ -127,6 +132,22 @@ public class Server {
             }
         }
         return "reponse,connexion," + username + ",erreur\n";
+    }
+
+    public String invite_friend() {
+        return "reponse,demande_ami,demandeur,receveur,erreur";
+    }
+
+    public String get_invitation() {
+
+    }
+
+    public String accept_invitation() {
+        return "reponse,accepte_demande,demandeur,receveur,erreur";
+    }
+
+    public String () {
+        return "reponse,accepte_demande,demandeur,receveur,erreur";
     }
 
     public void leak_db() {
