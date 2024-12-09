@@ -8,6 +8,7 @@ Simple social network written in Java
 
 
 ## 🚀 Getting started
+
 > [!INFO]
 > You'll need to install ant first
 
