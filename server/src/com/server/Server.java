@@ -161,8 +161,8 @@ public class Server {
     /**
      * Permet d'envoyer une demande d'ami ()
      * 
-     * @param sender            Celui qui envoie la demande d'ami
-     * @param receiver          Celui qui recoit la demande d'ami
+     * @param sender_name       
+     * @param receiver_name       
      * @return
      */
     public String invite_friend(String sender_name, String receiver_name) {
