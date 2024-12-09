@@ -1,6 +1,11 @@
 # Aspect protocolaire
 
-## INSCRIPTION
+<br><br>
+
+
+## Inscription
+
+<br><br>
 
 ### Demande d'inscription
 
@@ -27,7 +32,12 @@ si pas ok:
 reponse,inscription,login,erreur
 ```
 
-## CONNEXION
+<br><br>
+
+## Connexion
+
+<br><br>
+
 
 ### Demande d'authentification
 
@@ -54,7 +64,7 @@ si pas ok:
 reponse,connexion,login,erreur
 ```
 
-## DEMANDE D'AMI
+## Demande d'ami
 
 ### Demande d'ami
 
@@ -148,7 +158,7 @@ reponse,demande_accepte,demandeur,receveur,non
 ```
 
 
-## GESTION DES MESSAGES
+## Gestion des messages
 
 ### Envoi d'un message
 
@@ -175,6 +185,7 @@ si pas ok:
 ```
 reponse,envoie_message,login,receveur,erreur
 ```
+
 
 ## Récupérer les messages envoyés/reçus
 
