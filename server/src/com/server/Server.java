@@ -194,7 +194,6 @@ public class Server {
         User sender = current_user.friend_requests[current_user.friend_request_number-1];
 
         return "reponse,recuperation_demande," + sender.get_username() + "," + username + ",ok\n";
-
     }
 
     public String accept_friend_request() {
