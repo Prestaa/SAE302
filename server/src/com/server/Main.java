@@ -4,6 +4,8 @@
  */
 package com.server;
 
+import java.net.SocketException;
+
 /**
  *
  * @author anas
@@ -15,7 +17,14 @@ public class Main {
      */
     public static void main(String[] args) {	
         Server server = new Server();
-        server.run();
+
+        try {
+            server.run();
+        } catch(SocketException e) {
+            System.out.println("[ERROR] " + e);
+        } catch(Exception e) {
+            System.out.println("[ERROR] " + e);
+        }
         server.close();
     }
 
