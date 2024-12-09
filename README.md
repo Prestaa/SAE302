@@ -1,12 +1,14 @@
 <div align="center">
+
 # CyberShop
 Simple social network written in Java
-<div>
+
+</div>
 
 
 
 ## 🚀 Getting started
-> [!WARNING]
+> [!INFO]
 > You'll need to install ant first
 
 ```bash
