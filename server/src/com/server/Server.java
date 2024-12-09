@@ -138,16 +138,16 @@ public class Server {
         return "reponse,demande_ami,demandeur,receveur,erreur";
     }
 
-    public String get_invitation() {
-
+    public String get_friend_request() {
+        return "reponse,recuperation_demande,demandeur,receveur,erreur";
     }
 
-    public String accept_invitation() {
+    public String accept_friend_request() {
         return "reponse,accepte_demande,demandeur,receveur,erreur";
     }
 
-    public String () {
-        return "reponse,accepte_demande,demandeur,receveur,erreur";
+    public String get_accepted_friend() {
+        return "reponse,demande_accepte,demandeur,receveur,erreur";
     }
 
     public void leak_db() {

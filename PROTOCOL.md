@@ -140,16 +140,30 @@ reponse,accepte_demande,receveur,login_demandeur,erreur
 
 
 ### Récupération des demandes accepté
-> Le demandeur récupère les demandes d'amis qu'ils avaient envoyées et qui ont été acceptées.
+> La personnee récupère les demandes d'amis qu'ils avaient envoyées et qui ont été acceptées.
 
 > **client ➡️ serveur**
 ```
-# Le receveur a accepté la demande d'ami
-reponse,demande_accepte,demandeur,receveur,oui
-# Le receveur a refusé la demande d'ami
-reponse,demande_accepte,demandeur,receveur,non
+demande_accepte,login
 ```
 
+> **client ⬅️ serveur**
+
+<br>
+
+si ok:
+```
+reponse,demande_accepte,login,receveur
+```
+
+<br>
+si pas ok:
+- Si on n'a aucune demande d'ami acceptée
+- Receveur/Demandeur n'existe pas / est vide / contient une `,`
+
+```
+reponse,demande_accepte,login,erreur
+```
 
 ## Gestion des messages
 
