@@ -23,3 +23,9 @@ make client-build
 # Run the client
 make client
 ```
+
+## 📝 Technical details
+
+- Le serveur est dans la dir `server/` et a pour package com.server. 
+- Le client est dans la dir `client/` et a pour package com.client
+- Le serveur écoute sur le port 9876.
