@@ -174,7 +174,7 @@ reponse,demande_accepte,login,erreur
 
 > **client ➡️ serveur**
 ```
-envoie_message,login,receveur,message
+envoi_message,login,receveur,titre,message
 ```
 
 > **client ⬅️ serveur**
@@ -183,7 +183,7 @@ envoie_message,login,receveur,message
 
 si ok:
 ```
-reponse,envoie_message,login,receveur,message
+reponse,envoi_message,login,receveur,titre,message
 ```
  
 <br>
@@ -193,7 +193,7 @@ si pas ok:
 - Pas ami avec le receveur
 
 ```
-reponse,envoie_message,login,receveur,erreur
+reponse,envoi_message,login,receveur,null,erreur
 ```
 
 
@@ -201,7 +201,7 @@ reponse,envoie_message,login,receveur,erreur
 
 > **client ➡️ serveur**
 ```
-recuperer_message,login,receveur,message
+recuperer_message,login,receveur
 ```
 
 > **client ⬅️ serveur**

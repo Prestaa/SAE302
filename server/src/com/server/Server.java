@@ -44,10 +44,10 @@ public class Server {
             String received_message = get_client_message();
 
             // To send contiendra le message à envoyer au client 
-            byte[] to_send = this.get_to_send_message(received_message);
+            byte[] to_send = this.get_to_send_packet(received_message);
             
-            // On envoie au client
-            send_message(to_send);
+            // On envoi au client
+            send_packet(to_send);
         }
     }
 
@@ -59,7 +59,7 @@ public class Server {
      * @param client_message        Message du client (ex: connexion,test,test)
      * @return
      */
-    public byte[] get_to_send_message(String client_message) {
+    public byte[] get_to_send_packet(String client_message) {
 
         String[] words = client_message.split(",");
         String to_send;
@@ -83,16 +83,19 @@ public class Server {
                 break;
 
             case "accepte_demande":
-                to_send = accept_friend_request();
+                to_send = (words.length >= 3) ? accept_friend_request(words[1], words[2]) : "reponse,accepte_demande,null,null,erreur\n";
                 break;
 
             case "demande_accepte":
-                to_send = get_accepted_friend();
+                to_send = (words.length >= 3) ? get_accepted_friend(words[1], words[2]) : "reponse,demande_accepte,null,null,erreur\n";
                 break;
 
-            case "envoie_message":
+            case "envoi_message":
+                to_send = (words.length >= 4) ? send_message(words[1], words[2], words[3], words[4]) : "reponse,envoi_message,null,null,null,erreur\n";
+                break;
+
             case "recuperer_message":
-                to_send = "\n";
+                to_send = (words.length >= 2) ? get_message(words[1]) : "??????\n";
                 break;
                 
             case "":
@@ -179,31 +182,52 @@ public class Server {
         return "reponse,demande_ami," + sender_name + "," + receiver_name + ",ok\n";
     }
 
+
+    /**
+     * Récuperer les friend requests reçues
+     * 
+     * @param username
+     * @return
+     */
     public String get_friend_request(String username) {
         int user_id = username_to_id(username);
         
         if(user_id == -1)
-            return "reponse,recuperation_demande,demandeur,receveur,erreur\n";
+            return "reponse,recuperer_demande,demandeur,receveur,erreur\n";
 
         User current_user = users[user_id];
 
         // Nous n'avons aucune demande d'ami
         if(current_user.friend_request_number == 0)
-            return "reponse,recuperation_demande,demandeur,receveur,erreur\n";
+            return "reponse,recuperer_demande,demandeur,receveur,erreur\n";
 
         User sender = current_user.friend_requests[current_user.friend_request_number-1];
 
-        return "reponse,recuperation_demande," + sender.get_username() + "," + username + ",ok\n";
+        return "reponse,recuperer_demande," + sender.get_username() + "," + username + ",ok\n";
     }
 
-    public String accept_friend_request() {
+
+    public String accept_friend_request(String demandeur, String receveur) {
         return "reponse,accepte_demande,demandeur,receveur,erreur\n";
     }
 
-    public String get_accepted_friend() {
+    public String get_accepted_friend(String demandeur, String receveur) {
         return "reponse,demande_accepte,demandeur,receveur,erreur\n";
     }
 
+
+    public String send_message(String demandeur, String receveur) {
+        return "reponse,demande_accepte,demandeur,receveur,erreur\n";
+    }
+
+
+    public String get_message(String username) {
+        return "reponse,demande_accepte,demandeur,receveur,erreur\n";
+    }
+
+    public String send_message(String username, String receiver, String title, String body) {
+        return "reponse,envoi_message,null,null,null,erreur\n";
+    }
 
     /* --------------------- UTILS --------------------- */
     /*                                                   */
@@ -219,7 +243,7 @@ public class Server {
      * @param sent_bytes
      * @throws IOException
      */
-    public void send_message(byte[] sent_bytes) throws IOException {
+    public void send_packet(byte[] sent_bytes) throws IOException {
         InetAddress client_addr = this.received.getAddress();
         int client_port = this.received.getPort();
 
@@ -243,7 +267,7 @@ public class Server {
 
 
     /**
-     * Renvoie l'id dans le tableau users[] correspondant au user ayant comme 
+     * Renvoi l'id dans le tableau users[] correspondant au user ayant comme 
      * username la valeur passé en paramètre. -1 sinon.
      * 
      * @param username
