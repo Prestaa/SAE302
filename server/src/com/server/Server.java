@@ -16,19 +16,22 @@ public class Server {
 
             // Récéption des paquets du client
             byte[] recived_bytes = new byte[256];
-            DatagramPacket receivedPacket = new DatagramPacket(receivedBytes, receivedBytes.length);
-            this.socket.receive(receivedPacket);
+            DatagramPacket received_packet = new DatagramPacket(recived_bytes, recived_bytes.length);
+            this.socket.receive(received_packet);
 
             // Récupération du message envoyé par le client
-            String message = new String(receivedPacket.getData(), 0, receivedPacket.getLength());
+            String message = new String(received_packet.getData(), 0, received_packet.getLength());
             System.out.println(message);
 
             // Envoi de la réponse
             String response = "Message bien reçu !";
-            byte[] sentBytes = response.getBytes();
+            byte[] sent_bytes = response.getBytes();
             
-            InetAddress client_addr = receivedPacket.getAddress()
+            InetAddress client_addr = received_packet.getAddress();
+            int client_port = received_packet.getPort();
 
+            DatagramPacket send_packet = new DatagramPacket(sent_bytes, sent_bytes.length, client_addr, client_port);
+            this.socket.send(send_packet);
 
 
         } catch(SocketException e) {
