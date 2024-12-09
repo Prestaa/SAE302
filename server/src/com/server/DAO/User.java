@@ -1,33 +1,42 @@
 package com.server.DAO;
 
 public class User {
-    private User[] ami;
-    private int friend_number;
     private String username, password;
-    private boolean is_connected;
+    private int friend_number = 0;
+    private User[] friends;
+    
+    public int friend_requests_number = 0;
+    public User[] friend_requests;
 
     public User(String username, String password) {
-        this.ami = new User[10];
-        this.friend_number = 0;
+        this.friend_requests = new User[10];
+        this.friends = new User[10];
+
         this.username = username;
         this.password = password;
     }
 
-    public void add_friend(User friend) {
-        if(friend_number >= 10) {
-            return;
-        }
+    public boolean add_friend(User friend) {
+        if(friend_number >= 10) return false;
         
-        ami[friend_number++] = friend;
+        this.friends[friend_number++] = friend;
+        return true;
     }
 
-    public void set_connected(boolean state) {
-        this.is_connected = state;
+    public boolean add_friend_request(User friend) {
+        // On a atteint le quota max d'ami
+        if(this.friend_requests_number >= 10) return false;
+        
+        // On va chercher si on a déjà cet ami
+        for(int i = 0; i <= this.friend_number; i++)
+            // Si on a déjà ce user en ami on retourne false
+            if(this.friends[i].get_username().equals(friend.get_username())) 
+                return false;
+        
+        friend_requests[friend_requests_number++] = friend;
+        return true;
     }
 
-    public boolean is_connected() {
-        return is_connected;
-    }
 
     public String get_username() {
         return this.username;
@@ -37,5 +46,5 @@ public class User {
         return username.equals(this.username) && password.equals(password); 
     }
 
-    public String leak_password() { return password; }
+    public void show() { System.out.println("User:" + this.username + " | Pass:" + this.password); }
 }
