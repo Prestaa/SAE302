@@ -1,16 +1,14 @@
 <div align="center">
 
-# CyberShop
+# JavaChat
 Simple social network written in Java
 
 </div>
 
 
 
-## 🚀 Getting started
-
-> [!INFO]
-> You'll need to install ant first
+## 🚀 Getting Started
+> **You'll need to install ant first**
 
 ```bash
 # Compile the project
