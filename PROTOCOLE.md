@@ -31,9 +31,6 @@ reponse,inscription,login,erreur
 
 ## Connexion
 
-<br><br>
-
-
 ### Demande d'authentification
 
 > **client ➡️ serveur**
