@@ -4,12 +4,12 @@
 
 ### Demande d'inscription
 
-**client ➡️ serveur**
+> **client ➡️ serveur**
 ```
 inscription,login,mdp
 ```
 
-**client ⬅️ serveur**
+> **client ⬅️ serveur**
 <br>
 si ok:
 ```
