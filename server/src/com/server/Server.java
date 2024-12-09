@@ -67,19 +67,19 @@ public class Server {
         // words[0] => la commande envoyée par le client
         switch (words[0]) {
             case "inscription":
-                to_send = (words.length == 3) ? signup(words[1], words[2]) : "reponse,inscription,null,erreur\n";
+                to_send = (words.length >= 3) ? signup(words[1], words[2]) : "reponse,inscription,null,erreur\n";
                 break;
 
             case "connexion":
-                to_send = (words.length == 3) ? login(words[1], words[2]) : "reponse,connexion,null,erreur\n";
+                to_send = (words.length >= 3) ? login(words[1], words[2]) : "reponse,connexion,null,erreur\n";
                 break;
 
             case "demande_ami":
-                to_send = (words.length == 3) ? invite_friend(words[1], words[2]) : "reponse,demande_ami,null,erreur\n";
+                to_send = (words.length >= 3) ? invite_friend(words[1], words[2]) : "reponse,demande_ami,null,erreur\n";
                 break;
 
             case "recuperer_demande":
-                to_send = get_friend_request();
+                to_send = (words.length >= 2) ? get_friend_request(words[1]) : "reponse,recuperer_demande,null,erreur\n";
                 break;
 
             case "accepte_demande":
@@ -99,6 +99,11 @@ public class Server {
                 to_send = "\n";
                 break;
 
+            /* DEV COMMANDS */
+            case "show":
+                users[this.username_to_id(words[1])].show();
+                to_send = "\n";
+                break;
             default:
                 to_send = "reponse,null,null,erreur\n";
                 break;
@@ -120,17 +125,10 @@ public class Server {
         if(user_number >= 10)
             return "reponse,inscription,null,erreur\n";
 
-        // Si l'utilisateur existe déjà
-        if(username_to_id(login) != -1) 
+        // Si l'utilisateur existe déjà OU que le login/password est vide
+        if(username_to_id(login) != -1 || login == "" || password == "") 
             return "reponse,inscription," + login + ",erreur\n";
 
-        // Si le login ou le mot de passe est vide
-        if(login.isEmpty() || login == "" || password.isEmpty() || password == "") {
-            return "reponse,inscription," + login + ",erreur\n";
-        }
-
-        System.out.println("[DEBUG] Ajout de l'utilisateur " + login + ":" + password);
-        
         users[user_number++] = new User(login, password);
         return "reponse,inscription," + login + ",ok\n";
     }
@@ -146,26 +144,23 @@ public class Server {
     public String login(String username, String password) {
         int user_id = username_to_id(username);
 
-        // L'utilisateur n'existe pas
-        if(user_id == -1)
+        // L'utilisateur n'existe pas OU les identifiants sont incorrect
+        if(user_id == -1 || !this.users[user_id].login(username, password))
             return "reponse,connexion," + username + ",erreur\n";
         
-        // Ce n'est pas les bons identifiants
-        if(!this.users[user_id].login(username, password))
-            return "reponse,connexion," + username + ",erreur\n";
-
         return "reponse,connexion," + username + ",ok\n";
     }
 
 
     /**
-     * Permet d'envoyer une demande d'ami ()
+     * Permet d'envoyer une demande d'ami 
      * 
      * @param sender_name       
      * @param receiver_name       
      * @return
      */
     public String invite_friend(String sender_name, String receiver_name) {
+        
         int sender_id = username_to_id(sender_name);
         int receiver_id = username_to_id(receiver_name);
 
@@ -184,8 +179,22 @@ public class Server {
         return "reponse,demande_ami," + sender_name + "," + receiver_name + ",ok\n";
     }
 
-    public String get_friend_request() {
-        return "reponse,recuperation_demande,demandeur,receveur,erreur\n";
+    public String get_friend_request(String username) {
+        int user_id = username_to_id(username);
+        
+        if(user_id == -1)
+            return "reponse,recuperation_demande,demandeur,receveur,erreur\n";
+
+        User current_user = users[user_id];
+
+        // Nous n'avons aucune demande d'ami
+        if(current_user.friend_request_number == 0)
+            return "reponse,recuperation_demande,demandeur,receveur,erreur\n";
+
+        User sender = current_user.friend_requests[current_user.friend_request_number-1];
+
+        return "reponse,recuperation_demande," + sender.get_username() + "," + username + ",ok\n";
+
     }
 
     public String accept_friend_request() {
@@ -244,7 +253,7 @@ public class Server {
     public int username_to_id(String username) {
         for(int i=0; i < user_number; i++) {
             // Si le login est deja présent dans la DB
-            if(users[i].get_username().equals(username)) {
+            if(users[i] != null && users[i].get_username().equals(username)) {
                 return i;
             }
         }
@@ -261,7 +270,7 @@ public class Server {
         System.out.println("---------------------------");
         for(int i = 0; i <= this.user_number; i++)
             if(users[i] != null)    
-                this.users[i].show();
+                System.out.println(this.users[i].get_username());
         System.out.println("---------------------------");
     }
 
@@ -269,4 +278,6 @@ public class Server {
     public void close() {
         if(!socket.isClosed()) socket.close();
     }
+
+
 }

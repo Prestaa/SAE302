@@ -80,6 +80,7 @@ si pas ok:
 - Demandeur/Receveur n'existe pas / est vide / contient une `,`
 - Le receveur est déjà ami avec le demandeur
 - L'utilisateur a atteint le nombre maximal d'ami
+- L'utilisateur essaye de s'ajouter en ami
 ```
 reponse,demande_ami,login,erreur
 ```
@@ -98,7 +99,7 @@ recuperer_demande,login
 
 si ok:
 ```
-reponse,recuperation_demande,login,demandeur
+reponse,recuperation_demande,login,demandeur,ok
 ```
 
 <br>
@@ -107,7 +108,8 @@ si pas ok:
 - Login n'existe pas / est vide / contient une `,`
 - Le receveur n'a pas recu de demande d'ami de ce demandeur
 ```
-reponse,recuperation_demande,login,erreur
+# On met deux fois erreur pour faciliter le parsing côté client
+reponse,recuperation_demande,login,erreur,erreur
 ```
 
 ### Acceptation d'une demande d'ami
