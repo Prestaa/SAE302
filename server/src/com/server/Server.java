@@ -51,20 +51,37 @@ public class Server {
 
         switch (words[0]) {
             case "inscription":
-                if(words.length == 3) {
+                if(words.length == 3)
                     to_send = signup(words[1], words[2]);                
-                } else {
+                else
                     to_send = "reponse,inscription,null,erreur\n";
-                }
                 break;
 
             case "connexion":
-                if(words.length == 3) {
+                if(words.length == 3)
                     to_send = login(words[1], words[2]);                
-                } else {
+                else 
                     to_send = "reponse,connexion,null,erreur\n";
-                }
                 break;
+
+            case "demande_ami":
+                to_send = invite_friend();
+                break;
+            case "recuperer_demande":
+                to_send = get_friend_request();
+                break;
+            case "accepte_demande":
+                to_send = accept_friend_request();
+                break;
+            case "demande_accepte":
+                to_send = get_accepted_friend();
+                break;
+
+            case "envoie_message":
+            case "recuperer_message":
+                to_send = "echozçoudjdik\n";
+                break;
+                
             case "":
                 to_send = "\n";
                 break;
