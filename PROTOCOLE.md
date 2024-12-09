@@ -10,10 +10,13 @@ inscription,login,mdp
 ```
 
 **client <- serveur**
+<br>
 si ok:
 ```
 reponse,inscription,login,ok
 ```
+
+<br>
 si pas ok:
 - Nombre d'utilisateur max atteint
 - Login existe déjà / est vide / contient une `,` 
@@ -32,11 +35,13 @@ connexion,login,mdp
 ```
 
 **client <- serveur**
+<br>
 si ok:
 ```
 reponse,connexion,login,ok
 ```
 
+<br>
 si pas ok:
 - Login n'existe pas / est vide / contient une `,`
 - Le mot de passe ne correspond pas au login
@@ -56,11 +61,13 @@ demande_ami,demandeur,receveur
 
 
 **client <- serveur**
+<br>
 si ok:
 ```
 reponse,demande_ami,demandeur,receveur,ok
 ```
 
+<br>
 si pas ok:
 - Demandeur/Receveur n'existe pas / est vide / contient une `,`
 ```
@@ -77,11 +84,13 @@ recuperer_demande,login
 ```
 
 **client <- serveur**
+<br>
 si ok:
 ```
 reponse,recuperation_demande,login,demandeur
 ```
 
+<br>
 si pas ok:
 - Login n'existe pas / est vide / contient une `,`
 - Le receveur n'a pas recu de demande d'ami de ce demandeur
@@ -99,11 +108,13 @@ accepte_demande,receveur,demandeur,oui
 accepte_demande,receveur,demandeur,non
 ```
 
+<br>
 si ok:
 ```
 reponse,accepte_demande,receveur,demandeur,ok
 ```
 
+<br>
 si pas ok: 
 **Reponse en cas d'erreur:**
 - Demandeur n'a pas envoyé de demande d'ami
@@ -137,11 +148,13 @@ envoie_message,login,receveur,message
 
 **client <- serveur**
 
+<br>
 si ok:
 ```
 reponse,envoie_message,login,receveur,message
 ```
  
+<br>
 si pas ok:
 - Login/Receveur n'existe pas / est vide / contient une `,`
 - Pas ami avec le receveur
@@ -159,11 +172,13 @@ recuperer_message,login,receveur,message
 
 **client <- serveur**
 
+<br>
 si ok:
 ```
 reponse,recuperer_message,login,receveur,message
 ```
 
+<br>
 si pas ok:
 - Login/Receveur n'existe pas / est vide / contient une `,`
 - Pas ami avec receveur
