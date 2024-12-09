@@ -33,8 +33,6 @@ public class Server {
         while(true) {
             // On récupère le message envoyé par le client
             String received_message = get_client_message();
-            // On l'affiche
-            System.out.println(received_message);
 
             // To send contiendra le message à envoyer au client 
             byte[] to_send = this.get_to_send_message(received_message.strip());
@@ -47,14 +45,29 @@ public class Server {
     public byte[] get_to_send_message(String message) {
         String to_send;
 
-        if(message.equals("test")) {
-            to_send = "Test classique\n";
-        } else if (message.equals("test2")) {
-            to_send = "Test numéro deux\n";
-        } else {
-            to_send = "Bah tu m'as envoyé ni test ni test2 donc jsp\n";
-        }
+        String[] words = message.split(",");
 
+        switch (words[0]) {
+            case "inscription":
+                if(words.length == 3) {
+                    to_send = signup(words[1], words[2]);                
+                } else {
+                    to_send = "reponse,inscription,null,erreur\n";
+                }
+                break;
+
+            case "connexion":
+                if(words.length == 3) {
+                    to_send = login(words[1], words[2]);                
+                } else {
+                    to_send = "reponse,connexion,null,erreur\n";
+                }
+                break;
+            default:
+                to_send = "Unrecognized command\n";
+                break;
+        }
+        leak_db();
         return to_send.getBytes();
     }
 
@@ -76,5 +89,55 @@ public class Server {
 
     public void close() {
         if(!socket.isClosed()) socket.close();
+    }
+
+
+    public String signup(String login, String password) {
+        if(user_number >= 10) {
+            System.out.println("[DEBUG] Nombre d'inscrit maximum atteint");
+            return "reponse,inscription,null,erreur\n";
+        }
+
+        // On itère a travers chaque utilisateur de la db
+        for(int i=0; i < user_number; i++) {
+            String got_username = this.users[i].get_username();
+            // Si le login est deja présent dans la DB
+            if(got_username.equals(login)) {
+                System.out.println("[DEBUG] L'utilisateur existe déjà !");
+                return "reponse,inscription," + login + ",erreur\n";
+            }
+        } 
+
+        // Si le login ou le mot de passe est vide
+        if(login == null || login == "" || password == null || password == "") {
+            return "reponse,inscription," + login + ",erreur\n";
+        }
+
+        System.out.println("[DEBUG] Ajout de l'utilisateur " + login + ":" + password);
+        // On ajoute l'utilisateur
+        users[user_number++] = new User(login, password);
+        return "reponse,inscription," + login + ",ok\n";
+    }
+
+    public String login(String username, String password) {
+        for(int i=0; i < user_number; i++) {
+            // Si le login est deja présent dans la DB
+            if(users[i].login(username, password)) {
+                return "reponse,connexion," + username + ",ok\n";
+            }
+        }
+        return "reponse,connexion," + username + ",erreur\n";
+    }
+
+    public void leak_db() {
+        System.out.println("\n\n---------- LEAK DB ----------");
+        for(User user: users) {
+            if(user != null) {
+                // Si le login est deja présent dans la DB
+                System.out.println("user:" + user.get_username() + " pass:" + user.leak_password());
+            }
+        } 
+        System.out.println("---------- END LEAK ----------\n\n");
+
     }
 }

@@ -33,7 +33,9 @@ public class User {
         return this.username;
     }
 
-    public boolean password_cmp(String password_cmp) {
-        return this.password == password_cmp;
+    public boolean login(String username, String password) {
+        return username.equals(this.username) && password.equals(password); 
     }
+
+    public String leak_password() { return password; }
 }
