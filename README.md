@@ -11,9 +11,9 @@ Simple social network written in Java
 > **You'll need to install ant first.**
 
 ```bash
-# Compile the project
-make
+# Compile the server part
+make serv-build
 
-# Run the project
-make run
+# Run the server
+make serv
 ```

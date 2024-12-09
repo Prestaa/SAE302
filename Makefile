@@ -1,4 +1,13 @@
-build:
+serv-build:
 	ant -buildfile server/build.xml
-run:
-	@java -jar server/dist/SAE302.jar
+
+.PHONY: serv
+serv:
+	@java -jar server/dist/server.jar
+
+client-build:
+	ant -buildfile client/build.xml
+
+.PHONY: client
+client:
+	@java -jar client/dist/client.jar
