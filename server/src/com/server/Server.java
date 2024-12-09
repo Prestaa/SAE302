@@ -260,8 +260,8 @@ public class Server {
     public void leak_db() {
         System.out.println("---------------------------");
         for(int i = 0; i <= this.user_number; i++)
-            users[i].show();
-
+            if(users[i] != null)    
+                this.users[i].show();
         System.out.println("---------------------------");
     }
 
