@@ -1,9 +1,12 @@
-# SAE302
+<div align="center">
+# CyberShop
 Simple social network written in Java
+<div>
 
 
-# 🚀 Getting started
-> [!NOTE]
+
+## 🚀 Getting started
+> [!WARNING]
 > You'll need to install ant first
 
 ```bash
