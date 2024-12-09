@@ -29,12 +29,12 @@ reponse,inscription,login,erreur
 
 ### Demande d'authentification
 
-**client ➡️ serveur**
+> **client ➡️ serveur**
 ```
 connexion,login,mdp
 ```
 
-**client ⬅️ serveur**
+> **client ⬅️ serveur**
 <br>
 si ok:
 ```
@@ -54,13 +54,13 @@ reponse,connexion,login,erreur
 
 ### Demande d'ami
 
-**client ➡️ serveur**
+> **client ➡️ serveur**
 ```
 demande_ami,demandeur,receveur
 ```
 
 
-**client ⬅️ serveur**
+> **client ⬅️ serveur**
 <br>
 si ok:
 ```
@@ -78,12 +78,12 @@ reponse,demande_ami,login,erreur
 > Donne moi les demandes d'amis qui me concerne
 > demandeur = celui qui demande en ami
 
-**client ➡️ serveur**
+> **client ➡️ serveur**
 ```
 recuperer_demande,login
 ```
 
-**client ⬅️ serveur**
+> **client ⬅️ serveur**
 <br>
 si ok:
 ```
@@ -100,7 +100,7 @@ reponse,recuperation_demande,login,erreur
 
 ### Acceptation d'une demande d'ami
 
-**client ➡️ serveur**
+> **client ➡️ serveur**
 ```
 # Accepte la demande en ami
 accepte_demande,receveur,demandeur,oui
@@ -108,6 +108,7 @@ accepte_demande,receveur,demandeur,oui
 accepte_demande,receveur,demandeur,non
 ```
 
+> **client ⬅️ serveur**
 <br>
 si ok:
 ```
@@ -128,7 +129,7 @@ reponse,accepte_demande,receveur,login_demandeur,erreur
 ### Récupération des demandes accepté
 > Le demandeur récupère les demandes d'amis qu'ils avaient envoyées et qui ont été acceptées.
 
-**client ➡️ serveur**
+> **client ➡️ serveur**
 ```
 # Le receveur a accepté la demande d'ami
 reponse,demande_accepte,demandeur,receveur,oui
@@ -141,12 +142,12 @@ reponse,demande_accepte,demandeur,receveur,non
 
 ### Envoi d'un message
 
-**client ➡️ serveur**
+> **client ➡️ serveur**
 ```
 envoie_message,login,receveur,message
 ```
 
-**client ⬅️ serveur**
+> **client ⬅️ serveur**
 
 <br>
 si ok:
@@ -165,12 +166,12 @@ reponse,envoie_message,login,receveur,erreur
 
 ## Récupérer les messages envoyés/reçus
 
-**client ➡️ serveur**
+> **client ➡️ serveur**
 ```
 recuperer_message,login,receveur,message
 ```
 
-**client ⬅️ serveur**
+> **client ⬅️ serveur**
 
 <br>
 si ok:
