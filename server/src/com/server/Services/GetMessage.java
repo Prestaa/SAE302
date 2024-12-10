@@ -14,7 +14,8 @@ public class GetMessage {
         this.server = server;
     }
 
-    public String action(String user, String friend, String envoyeur, String str_position) {
+    public String action(String user, String friend, String str_position) {
+        System.out.println("USER" + user);
 
         String error_message = "reponse,demande_message,null,null,null,null\n";
         int user_id = server.username_to_id(user);
@@ -31,17 +32,17 @@ public class GetMessage {
         User user_user = server.users[user_id];
         User friend_user = server.users[friend_id];
 
-        ArrayList<Message> message = user_user.get_messages(friend_user, position);
+        ArrayList<Message> messages = user_user.get_messages(friend_user, position);
         
-        if(message != null)
-            return "reponse,demande_message," + user + "," + friend + "," + envoyeur + ",null,null\n";
-
+        if(messages == null)
+            return "reponse,demande_message," + user + "," + friend + ",null,null,null\n";
 
         String suite = "non";
-        if(position < message.size()) {
+        if(position < messages.size()) {
             suite = "oui";
         }
+        Message message = messages.get(position-1);
 
-        return "reponse,demande_message," + user + "," + friend + "," + envoyeur + "," + message + "," + suite + "\n";
+        return "reponse,demande_message," + user + "," + friend + "," + message.sender.get_username() + "," + message.body + "," + suite + "\n";
     }
 }

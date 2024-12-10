@@ -15,19 +15,19 @@ public class SendMessages {
         int user_id = server.username_to_id(username);
         int receiver_id = server.username_to_id(receiver);
         
-        if(user_id == -1 || receiver_id == -1 || body.equals(""))
-            return "reponse,recuperer_message,null,null,null,non";
-        
-        User sender_user = server.users[user_id];
-        User receiver_user = server.users[receiver_id];
-
-        Message message = new Message(sender_user, receiver_user, body);
-
-        if(!sender_user.send_message(message, true) || !receiver_user.send_message(message, false)) {
-            return "reponse,recuperer_message,null,null,null,non";
-
+        if(user_id == -1 || receiver_id == -1 || body.equals("")) {
+            return "reponse,envoi_message,null,null,null,erreur";
         }
 
-        return "reponse,recuperer_message,login,receveur,message,suite";
+        User sender_user = server.users[user_id];
+        User receiver_user = server.users[receiver_id];
+    
+        Message message = new Message(sender_user, receiver_user, body);
+        
+        if(!sender_user.send_message(message, false) || !receiver_user.send_message(message, true)) {
+            return "reponse,envoi_message,null,null,null,erreur";
+        }
+
+        return "reponse,envoi_message," + user_id + "," + receiver + "," + body + ",ok";
     }
 }

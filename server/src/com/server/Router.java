@@ -19,6 +19,7 @@ public class Router {
     }
 
     public String get_server_response(String[] words) {
+        
         String to_send = "reponse,null,null,null";
 
         if(words[0].equals("inscription")) {
@@ -28,7 +29,6 @@ public class Router {
 
             if(words.length >= 3)
                 to_send = signup.action(words[1], words[2]); 
-
         } 
         else if(words[0].equals("connexion")) {
             Login login = new Login(server);
@@ -90,9 +90,8 @@ public class Router {
             GetMessage getMessage = new GetMessage(server);
 
             to_send = "reponse,demande_message,null,null,null,erreur\n";
-
-            if(words.length >= 5)
-                to_send = getMessage.action(words[1], words[2], words[3], words[4]);    
+            if(words.length >= 4)
+                to_send = getMessage.action(words[1], words[2], words[3]);    
         }
         else if(words[0].equals("")) { to_send = "\n"; }
 

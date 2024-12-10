@@ -14,7 +14,6 @@ public class Server {
 
     public static int MAX_USERS = 10;
     public static int MAX_FRIENDS = 10;
-    public static int MAX_MSG = 10;
 
     private DatagramSocket socket;
     private DatagramPacket received;

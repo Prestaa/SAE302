@@ -109,7 +109,6 @@ public class User {
      * @param sender
      */
     public boolean add_friend(User to_add, boolean sender) {
-        System.out.println("Je suis " + get_username() + " et je vais add " + to_add.get_username());
         int id_to_add = -1;
 
         if(sender) {
