@@ -28,7 +28,6 @@ public class Signup {
         if(server.username_to_id(login) != -1 || login == "" || password == "") 
             return "reponse,inscription," + login + ",erreur\n";
 
-        System.out.println("Ajout de l'utilisateur au sein de mes fesses");
         server.users[server.user_number++] = new User(login, password);
         return "reponse,inscription," + login + ",ok\n";
     }

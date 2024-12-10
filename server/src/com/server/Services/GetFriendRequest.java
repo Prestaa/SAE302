@@ -21,16 +21,19 @@ public class GetFriendRequest {
     public String action(String username) {
         int user_id = server.username_to_id(username);
 
+        
         if(user_id == -1)
-            return "reponse,recuperer_demande,demandeur,receveur,erreur\n";
-
+            return "reponse,recuperer_demande,null," + username + ",erreur\n";
+        
         User current_user = server.users[user_id];
-
+        
+        System.out.println("JE DEMANDE MES FRIENDS REQUESTS: " + current_user.get_username());
+        
         for(int i=0; i < current_user.friend_number; i++) {
             Friend tracker = current_user.friends[i];
             
-            if(tracker.is_friend())
-                return "reponse,recuperer_demande," + tracker.user.get_username() + "," + username + ",erreur\n";
+            if(!tracker.is_friend())
+                return "reponse,recuperer_demande," + tracker.user.get_username() + "," + username + ",ok\n";
         }        
 
 
