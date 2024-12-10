@@ -38,20 +38,14 @@ public class GetFriendRequest {
             }   
         }    
         
-        if(fr_requests == 0) {
+        if(fr_requests == 0 || friend_id > fr_requests) {
             return "reponse,recuperer_demande," + username + ",null,pas_de_demande_ami\n";
         }
 
-        if(friend_id >= fr_requests) {
-            return "reponse,recuperer_demande," + username + ",null,pas_de_demande_ami\n";
-        } else {
-            String next = "oui";
-            // C'est le dernier ami
-            if(friend_id == fr_requests - 1) {
-                next = "non";
-            }
-            Friend demandeur = current_user.friends[ids[friend_id]];
-            return "reponse,recuperation_demande,login," + demandeur.user.get_username() + "," + next + "\n";
-        }
+        // Si c'est le dernier ami on met non, sinon on met oui
+        String next = (friend_id == fr_requests -1 ) ? "non" : "oui";
+        Friend demandeur = current_user.friends[ids[friend_id]];
+        
+        return "reponse,recuperation_demande,login," + demandeur.user.get_username() + "," + next + "\n";
     }
 }

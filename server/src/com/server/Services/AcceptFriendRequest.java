@@ -31,7 +31,7 @@ public class AcceptFriendRequest {
             if(receveur_user.delete_friend_request(demandeur))
                 return "reponse,accepter_demande," + demandeur + "," + receveur + ",ok\n";
             else
-                return "reponse,accepter_demande," + demandeur + "," + receveur + ",null\n";
+                return "reponse,accepter_demande," + demandeur + "," + receveur + ",erreur\n";
         }  
         
         if(

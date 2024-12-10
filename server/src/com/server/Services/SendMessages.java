@@ -16,7 +16,7 @@ public class SendMessages {
         int receiver_id = server.username_to_id(receiver);
         
         if(user_id == -1 || receiver_id == -1 || body.equals("")) {
-            return "reponse,envoi_message,null,null,null,erreur";
+            return "reponse,envoi_message,null,null,erreur";
         }
 
         User sender_user = server.users[user_id];
@@ -25,9 +25,9 @@ public class SendMessages {
         Message message = new Message(sender_user, receiver_user, body);
         
         if(!sender_user.send_message(message, false) || !receiver_user.send_message(message, true)) {
-            return "reponse,envoi_message,null,null,null,erreur";
+            return "reponse,envoi_message,null,null,erreur";
         }
 
-        return "reponse,envoi_message," + user_id + "," + receiver + "," + body + ",ok";
+        return "reponse,envoi_message," + user_id + "," + receiver + ",ok";
     }
 }

@@ -17,7 +17,7 @@ public class GetMessage {
     public String action(String user, String friend, String str_position) {
         System.out.println("USER" + user);
 
-        String error_message = "reponse,demande_message,null,null,null,null\n";
+        String error_message = "reponse,demande_message,null,null,null,null,erreur\n";
         int user_id = server.username_to_id(user);
         int friend_id = server.username_to_id(friend);
         int position = -1;
@@ -35,7 +35,7 @@ public class GetMessage {
         ArrayList<Message> messages = user_user.get_messages(friend_user, position);
         
         if(messages == null)
-            return "reponse,demande_message," + user + "," + friend + ",null,null,null\n";
+            return "reponse,demande_message,null,null,null,null,erreur\n";
 
         String suite = "non";
         if(position < messages.size()) {

@@ -3,11 +3,11 @@ package com.server.Services;
 import com.server.Server;
 import com.server.Models.User;
 
-public class InviteFriend {
+public class SendFriendRequest {
     
     Server server;
 
-    public InviteFriend(Server server) {
+    public SendFriendRequest(Server server) {
         this.server = server;
     } 
     

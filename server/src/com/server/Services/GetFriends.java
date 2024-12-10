@@ -18,7 +18,7 @@ public class GetFriends {
         int user_id = server.username_to_id(username);
 
         if(user_id == -1)
-            return "reponse,recuperer_amis," + username + ",null,null,null,null,null,null,null,null,null,null";
+            return "reponse,recuperer_amis," + username + ",null,null,null,null,null,null,null,null,null,null,erreur";
 
         // Moi
         User user = server.users[user_id];

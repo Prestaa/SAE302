@@ -91,7 +91,7 @@ reponse,demande_ami,login,erreur
 
 > **client ➡️ serveur**
 ```
-# id -> id de la demande d'ami vu qu'on peut en avoir plusieurs
+# id -> id de la demande d'ami vu qu'on peut en avoir plusieurs (commence à 0)
 recuperer_demande,login,id
 ```
 
@@ -100,6 +100,7 @@ recuperer_demande,login,id
 
 si ok:
 ```
+# suite = est ce qu'on a d'autre demande d'ami après celle la ?
 reponse,recuperation_demande,login,demandeur,suite(=oui|non)
 ```
 
@@ -143,14 +144,10 @@ si pas ok:
 
 ```
 reponse,accepter_demande,receveur,demandeur,erreur
-
-# Si le receveur REFUSE la demande d'ami
-reponse,accepter_demande,receveur,=demandeur,refus_demande_ami
 ```
 
 
-### Récupération des demandes accepté
-> La personnee récupère les demandes d'amis qu'ils avaient envoyées et qui ont été acceptées.
+### Affichage de nos amis
 
 > **client ➡️ serveur**
 ```
@@ -163,34 +160,7 @@ recuperer_amis,login
 
 si ok:
 ```
-reponse,recuperer_amis,login,ami1,ami2,ami3,ami4,ami5,ami6,ami7,ami8,ami9,ami10
-```
-
-<br>
-si pas ok:
-- Receveur/Demandeur n'existe pas / est vide / contient une `,`
-
-```
-reponse,recuperer_amis,null,null
-
-# Si on a que deux amis
-reponse,recuperer_amis,login,ami1,ami2,null,null,null,null,null,null,null,null
-```
-
-### Affichage de nos amis
-
-> **client ➡️ serveur**
-```
-recuperer_demande_accepte,login
-```
-
-> **client ⬅️ serveur**
-
-<br>
-
-si ok:
-```
-reponse,recuperer_demande_accepte,login,receveur
+reponse,recuperer_amis,username,ami1,ami2,ami3,ami4,ami5,ami6,ami7,ami8,ami9,ami10
 ```
 
 <br>
@@ -199,7 +169,7 @@ si pas ok:
 - Receveur/Demandeur n'existe pas / est vide / contient une `,`
 
 ```
-reponse,demande_accepte,login,erreur
+reponse,recuperer_amis,username,ami1,ami2,ami3,ami4,ami5,ami6,ami7,ami8,ami9,ami10,erreur
 ```
 
 
@@ -254,6 +224,6 @@ si pas ok:
 - Login/Receveur n'existe pas / est vide / contient une `,`
 - Pas ami avec receveur
 ```
-reponse,demande_message,login,receveur,erreur
+reponse,demande_message,login,ami,envoyeur,message,erreur
 ```
 

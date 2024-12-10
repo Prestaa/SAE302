@@ -39,9 +39,9 @@ s.send("connexion,b,b\n".encode())
 s.recv(30)
 
 print("ON AFFICHE LES DEMANDES RÉÇUES PAR B")
-s.send("recuperer_demande,b\n".encode())
+s.send("recuperer_demande,b,0\n".encode())
 print(s.recv(50))
-s.send("recuperer_demande,b\n".encode())
+s.send("recuperer_demande,b,1\n".encode())
 print(s.recv(50))
 
 print("ON ACCEPTE LA DEMANDE DE A")
