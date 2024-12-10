@@ -107,11 +107,13 @@ public class User {
      * @param sender
      */
     public boolean add_friend(User to_add, boolean sender) {
+        System.out.println("Je suis " + get_username() + " et je vais add " + to_add.get_username());
         int id_to_add = -1;
 
         if(sender) {
             // On est l'envoyeur, on doit ajouter l'ami dans notre liste d'ami
             Friend new_friend = new Friend(to_add);
+            new_friend.friendify();
             friends[friend_number] = new_friend;
             friend_number++;
 

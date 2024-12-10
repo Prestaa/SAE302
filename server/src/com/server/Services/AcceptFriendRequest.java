@@ -31,9 +31,10 @@ public class AcceptFriendRequest {
             return "reponse,accepter_demande," + demandeur + "," + receveur + ",refus_demande_ami\n";
         } 
         
-        if(!receveur_user.add_friend(demandeur_user, false) && !demandeur_user.add_friend(receveur_user, true)) {
-            return "reponse,accepter_demande," + demandeur + "," + receveur + ",erreur\n";
-        }
+        if(
+            !receveur_user.add_friend(demandeur_user, false) || 
+            !demandeur_user.add_friend(receveur_user, true)
+        ) return "reponse,accepter_demande," + demandeur + "," + receveur + ",erreur\n";
 
         return "reponse,accepter_demande," + demandeur + "," + receveur + ",ok\n";
     }

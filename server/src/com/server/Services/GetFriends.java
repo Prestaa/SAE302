@@ -13,24 +13,27 @@ public class GetFriends {
     }
 
     public String action(String username) {
-        String to_send = "reponse,recuperer_amis," + username + ",null,null,null,null,null,null,null,null,null,null";
-
+        String to_send = "reponse,recuperer_amis," + username + "";
 
         int user_id = server.username_to_id(username);
 
         if(user_id == -1)
-            return to_send;
+            return "reponse,recuperer_amis," + username + ",null,null,null,null,null,null,null,null,null,null";
 
         // Moi
         User user = server.users[user_id];
         
         for(int i=0; i<Server.MAX_FRIENDS; i++) {
-            Friend tmp_friend = user.friends[i];
+
+            if(user.friends[i] == null) {
+                to_send += ",null";
+                continue;
+            }
+
+            Friend tmp_friend = user.friends[i];            
             if(tmp_friend.is_friend())
-                to_send += tmp_friend.user.get_username() + ",";
-            else 
-                to_send += "null,";
+                to_send += "," + tmp_friend.user.get_username();
         }
-        return to_send;
+        return to_send + "\n";
     }
 }

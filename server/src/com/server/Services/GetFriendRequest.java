@@ -27,8 +27,6 @@ public class GetFriendRequest {
         
         User current_user = server.users[user_id];
         
-        System.out.println("JE DEMANDE MES FRIENDS REQUESTS: " + current_user.get_username());
-        
         for(int i=0; i < current_user.friend_number; i++) {
             Friend tracker = current_user.friends[i];
             

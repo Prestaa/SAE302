@@ -71,7 +71,6 @@ public class Server {
         String to_send = this.router.get_server_response(words);
 
         // words[0] => la commande envoyée par le client
-        leak_db();
         return to_send.getBytes();
     }
 
