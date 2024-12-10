@@ -20,9 +20,14 @@ public class GetFriendRequest {
      */
     public String action(String username, String friend_id_string) {
         int user_id = server.username_to_id(username);
-        int friend_id = Integer.parseInt(friend_id_string);
+        int friend_id = -1;
+
+        try {
+            friend_id = Integer.parseInt(friend_id_string);
+        } catch(Exception e) {
+        }
         
-        if(user_id == -1)
+        if(user_id == -1 || friend_id == -1)
             return "reponse,recuperer_demande,null," + username + ",erreur\n";
         
         User current_user = server.users[user_id];
