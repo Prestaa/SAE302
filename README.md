@@ -28,4 +28,7 @@ make build
 make
 # Interagir avec lui
 nc -vu 127.0.0.1 1337
+
+# Ou via le script prévu à cet effet
+python3 script.py
 ```
