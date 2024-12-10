@@ -27,16 +27,14 @@ public class User {
         // L'utilisateur essaye de s'ajouter en ami
         if(friend_user.get_username().equals(this.get_username())) return false;
 
-        // On va chercher si on a déjà cet ami
+        // On va chercher si on a déjà cet ami ou si on l'a déja demandé
         for(int i = 0; i <= this.friend_number; i++)
             // Si on a déjà ce user en ami on retourne false
             if(this.friends[i] != null) {
                 Friend to_test_friend = this.friends[i];
                 User to_test_user = to_test_friend.user;
 
-                if(to_test_user.get_username().equals(friend_user.get_username()) && 
-                   to_test_friend.is_friend()
-                ) return false;
+                if(to_test_user.get_username().equals(friend_user.get_username())) return false;
             }
         
         Friend friend = new Friend(friend_user);
@@ -51,7 +49,7 @@ public class User {
 
 
     public boolean login(String username, String password) {
-        return username.equals(this.username) && password.equals(password); 
+        return this.username.equals(this.username) && this.password.equals(password); 
     }
 
 
@@ -76,7 +74,7 @@ public class User {
         }
     }
 
-    public void delete_friend_request(String to_delete_username) {
+    public boolean delete_friend_request(String to_delete_username) {
         int id_to_delete = -1;
 
         for(int i = 0; i < this.friend_number; i++) {
@@ -90,13 +88,15 @@ public class User {
             }
         }
 
-        if(id_to_delete == -1) return;
+        if(id_to_delete == -1) return false;
 
         // On décale tous les éléments après la friend request
         // de 1 à gauche
         for (int i = id_to_delete; i < this.friend_number - 1; i++) {
             this.friends[i] = this.friends[i + 1];
         }
+
+        return true;
 
     }
 

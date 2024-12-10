@@ -91,7 +91,8 @@ reponse,demande_ami,login,erreur
 
 > **client ➡️ serveur**
 ```
-recuperer_demande,login
+# id -> id de la demande d'ami vu qu'on peut en avoir plusieurs
+recuperer_demande,login,id
 ```
 
 > **client ⬅️ serveur**
@@ -99,7 +100,7 @@ recuperer_demande,login
 
 si ok:
 ```
-reponse,recuperation_demande,login,demandeur,ok
+reponse,recuperation_demande,login,demandeur,suite(=oui|non)
 ```
 
 <br>
@@ -108,10 +109,10 @@ si pas ok:
 - Login n'existe pas / est vide / contient une `,`
 - Le receveur n'a pas recu de demande d'ami de ce demandeur
 ```
-# On met deux fois erreur pour faciliter le parsing côté client
-reponse,recuperation_demande,login,erreur,erreur
+reponse,recuperation_demande,login,demandeur,erreur
+
 # Si on n'a pas de demande d'ami
-reponse,recuperation_demande,login,erreur,pas_de_demande_ami
+reponse,recuperation_demande,login,demandeur,pas_de_demande_ami
 ```
 
 

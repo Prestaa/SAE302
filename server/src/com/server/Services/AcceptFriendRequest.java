@@ -27,9 +27,12 @@ public class AcceptFriendRequest {
         User demandeur_user = server.users[demandeur_id];
 
         if(state.equals("non")) {
-            receveur_user.delete_friend_request(demandeur);
-            return "reponse,accepter_demande," + demandeur + "," + receveur + ",refus_demande_ami\n";
-        } 
+            // On vérifie cette demande d'ami
+            if(receveur_user.delete_friend_request(demandeur))
+                return "reponse,accepter_demande," + demandeur + "," + receveur + ",ok\n";
+            else
+                return "reponse,accepter_demande," + demandeur + "," + receveur + ",null\n";
+        }  
         
         if(
             !receveur_user.add_friend(demandeur_user, false) || 

@@ -51,8 +51,8 @@ public class Router {
 
             to_send = "reponse,recuperer_demande,null,erreur\n";
 
-            if(words.length >= 2)
-                to_send = getFriendRequest.action(words[1]);
+            if(words.length >= 3)
+                to_send = getFriendRequest.action(words[1], words[2]);
         } 
         else if(words[0].equals("accepter_demande")) {
             AcceptFriendRequest acceptFriendRequest = new AcceptFriendRequest(server);
