@@ -41,7 +41,7 @@ public class GetMessage {
         if(position < messages.size()) {
             suite = "oui";
         }
-        Message message = messages.get(position-1);
+        Message message = messages.get(position);
 
         return "reponse,demande_message," + user + "," + friend + "," + message.sender.get_username() + "," + message.body + "," + suite + "\n";
     }
