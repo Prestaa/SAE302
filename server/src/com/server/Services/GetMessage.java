@@ -1,5 +1,7 @@
 package com.server.Services;
 
+import java.util.ArrayList;
+
 import com.server.Server;
 import com.server.Models.User;
 import com.server.Models.Message;
@@ -27,10 +29,19 @@ public class GetMessage {
         if(position == -1 || user_id == -1 || friend_id == -1) return error_message;
 
         User user_user = server.users[user_id];
+        User friend_user = server.users[friend_id];
 
-        //Message message = user_user.get_messages(friend);
+        ArrayList<Message> message = user_user.get_messages(friend_user, position);
+        
+        if(message != null)
+            return "reponse,demande_message," + user + "," + friend + "," + envoyeur + ",null,null\n";
 
 
-        return "reponse,demande_message," + user + "," + friend + "," + envoyeur + "," + "test" + ",suite\n";
+        String suite = "non";
+        if(position < message.size()) {
+            suite = "oui";
+        }
+
+        return "reponse,demande_message," + user + "," + friend + "," + envoyeur + "," + message + "," + suite + "\n";
     }
 }

@@ -1,5 +1,7 @@
 package com.server.Models;
 
+import java.util.ArrayList;
+
 import com.server.Server;
 
 public class User {
@@ -161,8 +163,19 @@ public class User {
     }
 
 
-    /*public String get_messages(User friend) {
+    public ArrayList<Message> get_messages(User friend_user, int position) {
+        Friend friend = null;
 
+        for(int i = 0; i < this.friend_number; i++) {
+            if(friends[i].user.get_username().equals(friend_user.get_username())) {
+                friend = friends[i];
+            }
+        }
 
-    }*/
+        if(friend == null || position >= friend.message.size()) {
+            return null;
+        }
+
+        return friend.message;
+    }
 } 
