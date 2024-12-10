@@ -81,18 +81,18 @@ public class Router {
         else if(words[0].equals("envoi_message")) {
             SendMessages sendMessages = new SendMessages(server);
 
-            to_send = "reponse,recuperer_message,login,receveur,message,suite\n";
+            to_send = "reponse,envoi_message,null,null,null\n";
 
             if(words.length >= 4)
                 to_send = sendMessages.action(words[1], words[2], words[3]);    
         }
-        else if(words[0].equals("recuperer_message")) {
+        else if(words[0].equals("demande_message")) {
             GetMessage getMessage = new GetMessage(server);
 
-            to_send = "reponse,recuperer_message,null,null,null,null,erreur\n";
+            to_send = "reponse,demande_message,null,null,null,erreur\n";
 
-            if(words.length >= 3)
-                to_send = getMessage.action(words[1], words[2]);    
+            if(words.length >= 5)
+                to_send = getMessage.action(words[1], words[2], words[3], words[4]);    
         }
         else if(words[0].equals("")) { to_send = "\n"; }
 

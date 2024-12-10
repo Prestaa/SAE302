@@ -235,7 +235,7 @@ reponse,envoi_message,login,receveur,erreur
 
 > **client ➡️ serveur**
 ```
-recuperer_message,login,receveur,id
+demande_message,login,ami,id
 ```
 
 > **client ⬅️ serveur**
@@ -244,7 +244,7 @@ recuperer_message,login,receveur,id
 
 si ok:
 ```
-reponse,recuperer_message,login,receveur,message,suite(=oui ou non)
+reponse,demande_message,login,ami,envoyeur,message,suite(=oui ou non)
 ```
 
 <br>
@@ -253,6 +253,6 @@ si pas ok:
 - Login/Receveur n'existe pas / est vide / contient une `,`
 - Pas ami avec receveur
 ```
-reponse,recuperer_message,login,receveur,erreur
+reponse,demande_message,login,receveur,erreur
 ```
 

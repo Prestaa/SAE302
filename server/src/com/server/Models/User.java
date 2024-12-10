@@ -141,5 +141,28 @@ public class User {
         return true;
     }
 
-    
+
+    public boolean send_message(Message message, boolean is_sender) {
+        User to_search;
+
+        if(is_sender) 
+            to_search = message.sender;    
+        else
+            to_search = message.receiver;
+
+        for(int i = 0; i < this.friend_number; i++) {
+            if(friends[i].user.get_username().equals(to_search.get_username())) {
+                friends[i].message.add(message);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    /*public String get_messages(User friend) {
+
+
+    }*/
 } 

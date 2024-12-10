@@ -1,11 +1,14 @@
 package com.server.Models;
 
+import java.util.ArrayList;
+
 public class Friend {
     public boolean is_friend = false;
-    public Message[] message;
+    public ArrayList<Message> message;
     public User user;
 
     public Friend(User user) {
+        message = new ArrayList<Message>();
         this.user = user;
     }
 
