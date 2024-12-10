@@ -9,7 +9,8 @@ public class SendMessages {
         this.server = server;
     }
 
-    public String action(String username, String receiver, String title, String body) {
-        return "reponse,envoi_message,null,null,null,null,erreur";
+    public String action(String username, String receiver, String body) {
+        
+        return "reponse,recuperer_message,login,receveur,message,suite";
     }
 }

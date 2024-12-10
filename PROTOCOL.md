@@ -208,7 +208,7 @@ reponse,demande_accepte,login,erreur
 
 > **client ➡️ serveur**
 ```
-envoi_message,login,receveur,titre,message
+envoi_message,login,receveur,message
 ```
 
 > **client ⬅️ serveur**
@@ -217,7 +217,7 @@ envoi_message,login,receveur,titre,message
 
 si ok:
 ```
-reponse,envoi_message,login,receveur,titre,message,ok
+reponse,envoi_message,login,receveur,ok
 ```
  
 <br>
@@ -227,7 +227,7 @@ si pas ok:
 - Pas ami avec le receveur
 
 ```
-reponse,envoi_message,login,receveur,null,null,erreur
+reponse,envoi_message,login,receveur,erreur
 ```
 
 
@@ -235,7 +235,7 @@ reponse,envoi_message,login,receveur,null,null,erreur
 
 > **client ➡️ serveur**
 ```
-recuperer_message,login,receveur
+recuperer_message,login,receveur,id
 ```
 
 > **client ⬅️ serveur**
@@ -244,7 +244,7 @@ recuperer_message,login,receveur
 
 si ok:
 ```
-reponse,recuperer_message,login,receveur,titre,message
+reponse,recuperer_message,login,receveur,message,suite(=oui ou non)
 ```
 
 <br>

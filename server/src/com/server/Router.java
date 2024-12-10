@@ -70,13 +70,21 @@ public class Router {
             if(words.length >= 3)
                 to_send = getAcceptedFriendRequest.action(words[1], words[2]);
         }
+        else if(words[0].equals("recuperer_amis")) {
+            GetFriends getFriends = new GetFriends(server);
+            
+            to_send = "reponse,recuperer_amis,null,null,null,null,null,null,null,null,null,null,null";
+            
+            if(words.length >= 2)
+                to_send = getFriends.action(words[1]);
+        }
         else if(words[0].equals("envoi_message")) {
             SendMessages sendMessages = new SendMessages(server);
 
-            to_send = "reponse,envoi_message,null,null,null,null,erreur\n";
+            to_send = "reponse,recuperer_message,login,receveur,message,suite\n";
 
-            if(words.length >= 5)
-                to_send = sendMessages.action(words[1], words[2], words[3], words[4]);    
+            if(words.length >= 4)
+                to_send = sendMessages.action(words[1], words[2], words[3]);    
         }
         else if(words[0].equals("recuperer_message")) {
             GetMessage getMessage = new GetMessage(server);
@@ -85,14 +93,6 @@ public class Router {
 
             if(words.length >= 3)
                 to_send = getMessage.action(words[1], words[2]);    
-        }
-        else if(words[0].equals("recuperer_amis")) {
-            GetFriends getFriends = new GetFriends(server);
-
-            to_send = "reponse,recuperer_amis,null,null,null,null,null,null,null,null,null,null,null";
-            
-            if(words.length >= 2)
-                to_send = getFriends.action(words[1]);
         }
         else if(words[0].equals("")) { to_send = "\n"; }
 
