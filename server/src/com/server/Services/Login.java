@@ -1,7 +1,6 @@
 package com.server.Services;
 
 import com.server.Server;
-import com.server.Models.User;
 
 public class Login {
 

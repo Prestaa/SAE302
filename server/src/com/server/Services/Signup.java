@@ -21,7 +21,7 @@ public class Signup {
      */
     public String action(String login, String password) {
         // Si on a atteint le quota max d'utilisateurs inscrits
-        if(server.user_number >= 10) 
+        if(server.user_number >= Server.MAX_USERS) 
             return "reponse,inscription,null,erreur\n";
 
         // Si l'utilisateur existe déjà OU que le login/password est vide

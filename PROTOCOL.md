@@ -120,9 +120,9 @@ reponse,recuperation_demande,login,erreur,pas_de_demande_ami
 > **client ➡️ serveur**
 ```
 # Accepte la demande en ami
-accepte_demande,receveur,demandeur,oui
+accepter_demande,receveur,demandeur,oui
 # Refuse la demande en ami
-accepte_demande,receveur,demandeur,non
+accepter_demande,receveur,demandeur,non
 ```
 
 > **client ⬅️ serveur**
@@ -130,7 +130,7 @@ accepte_demande,receveur,demandeur,non
 
 si ok:
 ```
-reponse,accepte_demande,receveur,demandeur,ok
+reponse,accepter_demande,receveur,demandeur,ok
 ```
 
 <br>
@@ -141,12 +141,42 @@ si pas ok:
 - Receveur/Demandeur n'existe pas / est vide / contient une `,`
 
 ```
-reponse,accepte_demande,receveur,login_demandeur,erreur
+reponse,accepter_demande,receveur,demandeur,erreur
+
+# Si le receveur REFUSE la demande d'ami
+reponse,accepter_demande,receveur,=demandeur,refus_demande_ami
 ```
 
 
 ### Récupération des demandes accepté
 > La personnee récupère les demandes d'amis qu'ils avaient envoyées et qui ont été acceptées.
+
+> **client ➡️ serveur**
+```
+recuperer_amis,login
+```
+
+> **client ⬅️ serveur**
+
+<br>
+
+si ok:
+```
+reponse,recuperer_amis,login,ami1,ami2,ami3,ami4,ami5,ami6,ami7,ami8,ami9,ami10
+```
+
+<br>
+si pas ok:
+- Receveur/Demandeur n'existe pas / est vide / contient une `,`
+
+```
+reponse,recuperer_amis,null,null
+
+# Si on a que deux amis
+reponse,recuperer_amis,login,ami1,ami2,null,null,null,null,null,null,null,null
+```
+
+### Affichage de nos amis
 
 > **client ➡️ serveur**
 ```
@@ -170,6 +200,7 @@ si pas ok:
 ```
 reponse,demande_accepte,login,erreur
 ```
+
 
 ## Gestion des messages
 

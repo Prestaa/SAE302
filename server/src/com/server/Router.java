@@ -3,6 +3,7 @@ package com.server;
 import com.server.Services.AcceptFriendRequest;
 import com.server.Services.GetAcceptedFriendRequest;
 import com.server.Services.GetFriendRequest;
+import com.server.Services.GetFriends;
 import com.server.Services.GetMessage;
 import com.server.Services.InviteFriend;
 import com.server.Services.Login;
@@ -53,13 +54,13 @@ public class Router {
             if(words.length >= 2)
                 to_send = getFriendRequest.action(words[1]);
         } 
-        else if(words[0].equals("accepte_demande")) {
+        else if(words[0].equals("accepter_demande")) {
             AcceptFriendRequest acceptFriendRequest = new AcceptFriendRequest(server);
 
-            to_send = "reponse,accepte_demande,null,null,erreur\n";
+            to_send = "reponse,accepter_demande,null,null,erreur\n";
 
-            if(words.length >= 3)
-                to_send = acceptFriendRequest.action(words[1], words[2]);
+            if(words.length >= 4)
+                to_send = acceptFriendRequest.action(words[1], words[2], words[3]);
         }
         else if(words[0].equals("recuperer_demande_accepte")) {
             GetAcceptedFriendRequest getAcceptedFriendRequest = new GetAcceptedFriendRequest(server);
@@ -85,7 +86,14 @@ public class Router {
             if(words.length >= 3)
                 to_send = getMessage.action(words[1], words[2]);    
         }
+        else if(words[0].equals("recuperer_amis")) {
+            GetFriends getFriends = new GetFriends(server);
 
+            to_send = "reponse,recuperer_amis,null,null,null,null,null,null,null,null,null,null,null";
+            
+            if(words.length >= 2)
+                to_send = getFriends.action(words[1]);
+        }
         else if(words[0].equals("")) { to_send = "\n"; }
 
         return to_send;
