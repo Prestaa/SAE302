@@ -110,7 +110,10 @@ si pas ok:
 ```
 # On met deux fois erreur pour faciliter le parsing côté client
 reponse,recuperation_demande,login,erreur,erreur
+# Si on n'a pas de demande d'ami
+reponse,recuperation_demande,login,erreur,pas_de_demande_ami
 ```
+
 
 ### Acceptation d'une demande d'ami
 
@@ -147,7 +150,7 @@ reponse,accepte_demande,receveur,login_demandeur,erreur
 
 > **client ➡️ serveur**
 ```
-demande_accepte,login
+recuperer_demande_accepte,login
 ```
 
 > **client ⬅️ serveur**
@@ -156,7 +159,7 @@ demande_accepte,login
 
 si ok:
 ```
-reponse,demande_accepte,login,receveur
+reponse,recuperer_demande_accepte,login,receveur
 ```
 
 <br>
@@ -183,7 +186,7 @@ envoi_message,login,receveur,titre,message
 
 si ok:
 ```
-reponse,envoi_message,login,receveur,titre,message
+reponse,envoi_message,login,receveur,titre,message,ok
 ```
  
 <br>
@@ -193,7 +196,7 @@ si pas ok:
 - Pas ami avec le receveur
 
 ```
-reponse,envoi_message,login,receveur,null,erreur
+reponse,envoi_message,login,receveur,null,null,erreur
 ```
 
 
@@ -210,7 +213,7 @@ recuperer_message,login,receveur
 
 si ok:
 ```
-reponse,recuperer_message,login,receveur,message
+reponse,recuperer_message,login,receveur,titre,message
 ```
 
 <br>

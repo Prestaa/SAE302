@@ -6,7 +6,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 
-import com.server.DAO.User;
+import com.server.Models.User;
 
 public class Server {
 
@@ -15,14 +15,16 @@ public class Server {
     private DatagramSocket socket;
     private DatagramPacket received;
     private DatagramPacket sent;
-
+    
     private byte[] received_bytes;
-    private int user_number = 0;
-    private User[] users;
-
+    public int user_number = 0;
+    public User[] users;
+    
+    Router router;
     
     public Server() {
         users = new User[10];
+        router = new Router(this);
     }
 
 
@@ -62,180 +64,20 @@ public class Server {
     public byte[] get_to_send_packet(String client_message) {
 
         String[] words = client_message.split(",");
-        String to_send;
+        String to_send = this.router.get_server_response(words);
 
         // words[0] => la commande envoyée par le client
-        switch (words[0]) {
-            case "inscription":
-                to_send = (words.length >= 3) ? signup(words[1], words[2]) : "reponse,inscription,null,erreur\n";
-                break;
-
-            case "connexion":
-                to_send = (words.length >= 3) ? login(words[1], words[2]) : "reponse,connexion,null,erreur\n";
-                break;
-
-            case "demande_ami":
-                to_send = (words.length >= 3) ? invite_friend(words[1], words[2]) : "reponse,demande_ami,null,erreur\n";
-                break;
-
-            case "recuperer_demande":
-                to_send = (words.length >= 2) ? get_friend_request(words[1]) : "reponse,recuperer_demande,null,erreur\n";
-                break;
-
-            case "accepte_demande":
-                to_send = (words.length >= 3) ? accept_friend_request(words[1], words[2]) : "reponse,accepte_demande,null,null,erreur\n";
-                break;
-
-            case "demande_accepte":
-                to_send = (words.length >= 3) ? get_accepted_friend(words[1], words[2]) : "reponse,demande_accepte,null,null,erreur\n";
-                break;
-
-            case "envoi_message":
-                to_send = (words.length >= 4) ? send_message(words[1], words[2], words[3], words[4]) : "reponse,envoi_message,null,null,null,erreur\n";
-                break;
-
-            case "recuperer_message":
-                to_send = (words.length >= 2) ? get_message(words[1]) : "??????\n";
-                break;
-                
-            case "":
-                to_send = "\n";
-                break;
-
-            /* DEV COMMANDS */
-            case "show":
-                users[this.username_to_id(words[1])].show();
-                to_send = "\n";
-                break;
-            default:
-                to_send = "reponse,null,null,erreur\n";
-                break;
-        }
         leak_db();
         return to_send.getBytes();
     }
 
-
-    /**
-     * Inscrit un utilisateur
-     * 
-     * @param login
-     * @param password
-     * @return
-     */
-    public String signup(String login, String password) {
-        // Si on a atteint le quota max d'utilisateurs inscrits
-        if(user_number >= 10)
-            return "reponse,inscription,null,erreur\n";
-
-        // Si l'utilisateur existe déjà OU que le login/password est vide
-        if(username_to_id(login) != -1 || login == "" || password == "") 
-            return "reponse,inscription," + login + ",erreur\n";
-
-        users[user_number++] = new User(login, password);
-        return "reponse,inscription," + login + ",ok\n";
-    }
-
-
-    /**
-     * Authentifie un utilisateur
-     * 
-     * @param username
-     * @param password
-     * @return
-     */
-    public String login(String username, String password) {
-        int user_id = username_to_id(username);
-
-        // L'utilisateur n'existe pas OU les identifiants sont incorrect
-        if(user_id == -1 || !this.users[user_id].login(username, password))
-            return "reponse,connexion," + username + ",erreur\n";
-        
-        return "reponse,connexion," + username + ",ok\n";
-    }
-
-
-    /**
-     * Permet d'envoyer une demande d'ami 
-     * 
-     * @param sender_name       
-     * @param receiver_name       
-     * @return
-     */
-    public String invite_friend(String sender_name, String receiver_name) {
-        
-        int sender_id = username_to_id(sender_name);
-        int receiver_id = username_to_id(receiver_name);
-
-        // Le demandeur OU le receveur n'existe pas
-        if(sender_id == -1 || receiver_id == -1) {
-            return "reponse,demande_ami," + sender_name + "," + receiver_name + ",erreur\n";
-        }
-
-        User sender = users[sender_id];
-        User receiver = users[receiver_id];
-
-        if(!receiver.add_friend_request(sender))
-            return "reponse,demande_ami," + sender_name + "," + receiver_name + ",erreur\n";
-
-
-        return "reponse,demande_ami," + sender_name + "," + receiver_name + ",ok\n";
-    }
-
-
-    /**
-     * Récuperer les friend requests reçues
-     * 
-     * @param username
-     * @return
-     */
-    public String get_friend_request(String username) {
-        int user_id = username_to_id(username);
-        
-        if(user_id == -1)
-            return "reponse,recuperer_demande,demandeur,receveur,erreur\n";
-
-        User current_user = users[user_id];
-
-        // Nous n'avons aucune demande d'ami
-        if(current_user.friend_request_number == 0)
-            return "reponse,recuperer_demande,demandeur,receveur,erreur\n";
-
-        User sender = current_user.friend_requests[current_user.friend_request_number-1];
-
-        return "reponse,recuperer_demande," + sender.get_username() + "," + username + ",ok\n";
-    }
-
-
-    public String accept_friend_request(String demandeur, String receveur) {
-        return "reponse,accepte_demande,demandeur,receveur,erreur\n";
-    }
-
-    public String get_accepted_friend(String demandeur, String receveur) {
-        return "reponse,demande_accepte,demandeur,receveur,erreur\n";
-    }
-
-
-    public String send_message(String demandeur, String receveur) {
-        return "reponse,demande_accepte,demandeur,receveur,erreur\n";
-    }
-
-
-    public String get_message(String username) {
-        return "reponse,demande_accepte,demandeur,receveur,erreur\n";
-    }
-
-    public String send_message(String username, String receiver, String title, String body) {
-        return "reponse,envoi_message,null,null,null,erreur\n";
-    }
-
+ 
     /* --------------------- UTILS --------------------- */
     /*                                                   */
     /*     Fonctions utiles permettant de faciliter      */
     /*     la phase de développement                     */
     /*                                                   */
     /* ------------------------------------------------- */
-
 
     /**
      * Permet d'envoyer un messages au client UDP
@@ -301,6 +143,4 @@ public class Server {
     public void close() {
         if(!socket.isClosed()) socket.close();
     }
-
-
 }
