@@ -32,4 +32,6 @@ ses messages au format *“lecture,login”*. (côté client l’utilisateur lit
 # Organisation du travail
 
 Lundi nous avons constituer notre équipe de 4 : Enzo MANZINALI, Bastien LAURENT, Anas IDIRI et Romain MARC.
-La répartition des rôles fut un énorme échec suite à la prise du pouvoir du leader entrant : ***Anas IDIRI***. Il appliqua sa méthode orthonormée d'engager conflit avec le serveur de notra application.
+
+La répartition des rôles fut assez rapide à appliqué étant donner que nous étions tous rapidement d'accord sur comment produire le travail demandé. Nous nous sommes tous réunis pour mettre en place le protocol qui sera la colonne vertébrale du projet (*sprint planning*).
+Anas s'est appliqué sur le backend du serveur, pendant qu'Enzo, Romain et Bastien commençaient à travailler sur le client.
