@@ -27,3 +27,9 @@ ses messages au format *“lecture,login”*. (côté client l’utilisateur lit
 9. Pour inviter un autre utilisateur, l’invitant envoie un message *“demande_ami,login,ami”*.
     
 10.  A l’acceptation d’une invitation, l’invitant reçoit un message du serveur lui notifiant cette acceptation.
+    
+
+# Organisation du travail
+
+Lundi nous avons constituer notre équipe de 4 : Enzo MANZINALI, Bastien LAURENT, Anas IDIRI et Romain MARC.
+La répartition des rôles fut un énorme échec suite à la prise du pouvoir du leader entrant : ***Anas IDIRI***. Il appliqua sa méthode orthonormée d'engager conflit avec le serveur de notra application.
