@@ -6,8 +6,8 @@ import javafx.scene.control.TextField;
 
 public class SettingsController {
 
-    public static String ip_addr;
-    public static int port;
+    public static String ip_addr = "127.0.0.1";
+    public static int port = 1337;
 
     @FXML
     private TextField portInput;
