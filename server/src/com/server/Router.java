@@ -122,15 +122,6 @@ public class Router {
         }
         else if(words[0].equals("")) { to_send = ""; }
 
-        int id = server.username_to_id("a");
-        User a = server.users[id];
-        a.leak_db();
-        
-        int id_b = server.username_to_id("a");
-        User b = server.users[id_b];
-        b.leak_db();
-        
-
         return to_send;
     }
 }
