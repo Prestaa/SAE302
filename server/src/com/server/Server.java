@@ -78,7 +78,7 @@ public class Server {
     public byte[] get_to_send_datagram(String client_message) {
 
         String[] words = client_message.split(",");
-        String to_send = this.router.get_server_response(words);
+        String to_send = this.router.get_server_reponse(words);
 
         // words[0] => la commande envoyée par le client
         return to_send.getBytes();

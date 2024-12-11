@@ -15,17 +15,17 @@ public class DeleteAccount {
         int id = server.username_to_id(username);
         // L'utilisateur n'existe pas
         if(id == -1) 
-            return "response,delete,login,erreur\n";
+            return "reponse,delete,login,erreur\n";
 
         User user = server.users[id];
         if(!user.login(username, password)) 
-            return "response,delete,login,erreur\n";
+            return "reponse,delete,login,erreur\n";
         
         if(!server.delete_user(user))     
-            return "response,delete,login,erreur\n";
+            return "reponse,delete,login,erreur\n";
             
     
-        return "response,delete," + username + ",ok\n";
+        return "reponse,delete," + username + ",ok\n";
     }
 
 }

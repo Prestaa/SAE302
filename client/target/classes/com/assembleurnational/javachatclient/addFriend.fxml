@@ -4,6 +4,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
+<<<<<<< HEAD
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="268.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.assembleurnational.javachatclient.AddFriendController">
    
    <children>
@@ -13,5 +14,16 @@
          </graphic>
       </Button>
       <Button fx:id="backButton" alignment="CENTER" mnemonicParsing="false" onAction="#back" text="Back" />
+=======
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.assembleurnational.javachatclient.AddFriendController">
+   
+   <children>
+      <Button mnemonicParsing="false" onAction="#sendRequest" text="Send Request" fx:id="sendRequestButton">
+         <graphic>
+            <TextField promptText="JohnSmith" fx:id="friendInput"/>
+         </graphic>
+      </Button>
+>>>>>>> 834d37c57e98f0a6402c67ae887efe56c9bd7b81
    </children>
 </VBox>
