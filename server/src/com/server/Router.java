@@ -42,7 +42,7 @@ public class Router {
         String to_send = "reponse,null,null\n";
 
         if(words[0].equals("inscription")) {
-            //System.out.println("[DEBUG] INSCRIPTION d'un nouvel utilisateur");
+            System.out.println("[DEBUG] INSCRIPTION d'un nouvel utilisateur");
 
             Signup signup = new Signup(server);
 
@@ -52,7 +52,7 @@ public class Router {
                 to_send = signup.action(words[1], words[2]); 
         } 
         else if(words[0].equals("connexion")) {
-            //System.out.println("[DEBUG] CONNEXION d'un utilisateur");
+            System.out.println("[DEBUG] CONNEXION d'un utilisateur");
             
             Login login = new Login(server);
             
@@ -62,7 +62,7 @@ public class Router {
                 to_send = login.action(words[1], words[2]);            
         }
         else if(words[0].equals("demande_ami")) {
-            //System.out.println("[DEBUG] DEMANDE_AMI d'un utilisateur");
+            System.out.println("[DEBUG] DEMANDE_AMI d'un utilisateur");
             
             SendFriendRequest sendFriendRequest = new SendFriendRequest(server);
 
@@ -72,7 +72,7 @@ public class Router {
                 to_send = sendFriendRequest.action(words[1], words[2]);
         }
         else if(words[0].equals("recuperer_demande")) {
-            //System.out.println("[DEBUG] DEMANDE de récupération d'ami d'un utilisateur");
+            System.out.println("[DEBUG] DEMANDE de récupération d'ami d'un utilisateur");
             
             GetFriendRequest getFriendRequest = new GetFriendRequest(server);
 
@@ -82,7 +82,7 @@ public class Router {
                 to_send = getFriendRequest.action(words[1], words[2]);
         } 
         else if(words[0].equals("accepter_demande")) {
-            //System.out.println("[DEBUG] ACCEPTATION D'UNE DEMANDE d'ami d'un utilisateur");
+            System.out.println("[DEBUG] ACCEPTATION D'UNE DEMANDE d'ami d'un utilisateur");
 
             AcceptFriendRequest acceptFriendRequest = new AcceptFriendRequest(server);
 
@@ -92,7 +92,7 @@ public class Router {
                 to_send = acceptFriendRequest.action(words[1], words[2], words[3]);
         }
         else if(words[0].equals("recuperer_amis")) {
-            //System.out.println("[DEBUG] ACCEPTATION D'UNE DEMANDE d'ami d'un utilisateur");
+            System.out.println("[DEBUG] ACCEPTATION D'UNE DEMANDE d'ami d'un utilisateur");
 
             GetFriend getFriends = new GetFriend(server);
             
@@ -102,7 +102,7 @@ public class Router {
                 to_send = getFriends.action(words[1]);
         }
         else if(words[0].equals("envoi_message")) {
-            //System.out.println("[DEBUG] ENVOI DE MESSAGE d'un utilisateur");
+            System.out.println("[DEBUG] ENVOI DE MESSAGE d'un utilisateur");
 
             SendMessage sendMessages = new SendMessage(server);
 
@@ -112,7 +112,7 @@ public class Router {
                 to_send = sendMessages.action(words[1], words[2], words[3]);    
         }
         else if(words[0].equals("demande_message")) {
-            //System.out.println("[DEBUG] DEMANDE DE MESSAGE d'un utilisateur");
+            System.out.println("[DEBUG] DEMANDE DE MESSAGE d'un utilisateur");
 
             GetMessage getMessage = new GetMessage(server);
 

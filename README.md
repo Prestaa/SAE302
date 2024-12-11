@@ -14,11 +14,14 @@ Simple social network written in Java
 # Compile and run the server
 make build
 
+# Run the client
+make client
 ```
 
 ## 📝 Technical details
 
 - Le serveur est dans la dir `server/` et a pour package com.server. 
+- Le client est dans la dir `client/` et a pour package com.assembleurnational.javachatclient.
 - Le serveur écoute sur le port 1337.
 
 ## 🧪 Test
@@ -26,9 +29,11 @@ make build
 ```bash
 # Lancer le serveur
 make
-# Interagir avec lui
-nc -vu 127.0.0.1 1337
 
+# Interagir avec lui
+make client
 # Ou via le script prévu à cet effet
 python3 script.py
+# Ou en plus bas level
+nc -vu 127.0.0.1 1337
 ```
