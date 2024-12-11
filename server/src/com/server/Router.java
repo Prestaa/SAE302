@@ -9,10 +9,10 @@ import com.server.Actions.SendFriendRequest;
 import com.server.Actions.GetFriendRequest;
 import com.server.Actions.AcceptFriendRequest;
 
-import com.server.Actions.GetFriends;
+import com.server.Actions.GetFriend;
 
 // Gestion des messages
-import com.server.Actions.SendMessages;
+import com.server.Actions.SendMessage;
 import com.server.Actions.GetMessage;
 
 
@@ -94,7 +94,7 @@ public class Router {
         else if(words[0].equals("recuperer_amis")) {
             System.out.println("[DEBUG] ACCEPTATION D'UNE DEMANDE d'ami d'un utilisateur");
 
-            GetFriends getFriends = new GetFriends(server);
+            GetFriend getFriends = new GetFriend(server);
             
             to_send = "reponse,recuperer_amis,erreur";
             
@@ -104,7 +104,7 @@ public class Router {
         else if(words[0].equals("envoi_message")) {
             System.out.println("[DEBUG] ENVOI DE MESSAGE d'un utilisateur");
 
-            SendMessages sendMessages = new SendMessages(server);
+            SendMessage sendMessages = new SendMessage(server);
 
             to_send = "reponse,envoi_message,erreur\n";
 

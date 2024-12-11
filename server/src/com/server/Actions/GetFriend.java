@@ -4,11 +4,13 @@ import com.server.Server;
 import com.server.Models.Friend;
 import com.server.Models.User;
 
-
-public class GetFriends {
+/**
+ * Action permettant de récupérer les amis un par un
+ */
+public class GetFriend {
     Server server;
 
-    public GetFriends(Server server) {
+    public GetFriend(Server server) {
         this.server = server;
     }
 

@@ -4,10 +4,14 @@ import com.server.Models.Message;
 import com.server.Models.User;
 import com.server.Server;
 
-public class SendMessages {
+
+/**
+ * Action êrmettant d'envoyer un message
+ */
+public class SendMessage {
     Server server;
 
-    public SendMessages(Server server) {
+    public SendMessage(Server server) {
         this.server = server;
     }
 

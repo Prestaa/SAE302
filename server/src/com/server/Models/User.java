@@ -94,7 +94,7 @@ public class User {
      *      -> il faut ajouter l'ami dans la liste d'ami, si on est receiver
      *      -> sinon il faut juste toggle le state is_friend à true.
      * 
-     * @param to_add
+     * @param new_friend_user
      * @param sender        Définit si on est l'initiateur de la friend_request ou pas
      */
     public boolean add_friend(User new_friend_user, boolean sender) {

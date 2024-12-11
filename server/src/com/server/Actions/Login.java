@@ -2,6 +2,10 @@ package com.server.Actions;
 
 import com.server.Server;
 
+
+/**
+ * Action permettant de connecter un utilisateur
+ */
 public class Login {
 
     Server server;

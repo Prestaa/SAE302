@@ -3,6 +3,10 @@ package com.server.Actions;
 import com.server.Server;
 import com.server.Models.User;
 
+
+/**
+ * Action permettant d'envoyer une demande d'ami
+ */
 public class SendFriendRequest {
     
     Server server;

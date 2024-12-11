@@ -6,6 +6,10 @@ import com.server.Server;
 import com.server.Models.User;
 import com.server.Models.Message;
 
+
+/**
+ * Action permettant de récuperer message par message (le client envoie l'id)
+ */
 public class GetMessage {
     
     Server server;

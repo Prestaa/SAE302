@@ -3,6 +3,9 @@ package com.server.Actions;
 import com.server.Server;
 import com.server.Models.User;
 
+/**
+ * Action permettant d'accepter une demande d'ami
+ */
 public class AcceptFriendRequest {
     
     Server server;

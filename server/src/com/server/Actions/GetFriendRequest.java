@@ -4,6 +4,9 @@ import com.server.Server;
 import com.server.Models.User;
 import com.server.Models.Friend;
 
+/**
+ * Action permettant de récupérer chaque demande d'ami une par une (le client spécifie l'id)
+ */
 public class GetFriendRequest {
     
     Server server;
