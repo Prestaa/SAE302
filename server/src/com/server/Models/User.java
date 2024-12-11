@@ -18,8 +18,21 @@ public class User {
         this.password = password;
     }
 
-    
+    public String get_username() {
+        return this.username;
+    }
 
+    public boolean login(String username, String password) {
+        return this.username.equals(this.username) && this.password.equals(password); 
+    }
+
+    
+    /**
+     * Permet d'envoyer une friend_request à un utilisateur
+     * 
+     * @param friend_user
+     * @return
+     */
     public boolean add_friend_request(User friend_user) {
         // On a atteint le quota max d'ami
         if(this.friend_number >= Server.MAX_FRIENDS) return false;
@@ -43,37 +56,12 @@ public class User {
     }
 
 
-    public String get_username() {
-        return this.username;
-    }
-
-
-    public boolean login(String username, String password) {
-        return this.username.equals(this.username) && this.password.equals(password); 
-    }
-
-
-    public void show() { 
-        System.out.println("> GENERAL INFORMATIONS" +
-                            "\nUser:" + this.username + 
-                            "\nPass:" + this.password +
-                            "\n\n> FRIEND REQUESTS"                    
-        ); 
-
-        for(int i = 0; i < this.friend_number; i++) {
-            Friend friend = friends[i];
-            User friend_user = friends[i].user;
-
-            if(friend != null && friend_user != null)
-                continue;
-            
-            if(!friend.is_friend())
-                System.out.println("Demande d'ami de: " + friend_user.get_username());
-            else
-                System.out.println(friend_user.get_username() + " est votre ami.");
-        }
-    }
-
+    /**
+     * Permet de supprimer (refuser) une friend_request reçue
+     *  
+     * @param to_delete_username
+     * @return
+     */
     public boolean delete_friend_request(String to_delete_username) {
         int id_to_delete = -1;
 
@@ -102,18 +90,20 @@ public class User {
 
 
     /**
-     * Si on est sender alors il faut ajouter l'ami dans la liste d'ami, si on est receiver
-     * il faut juste toggle le state is_friend à true.
+     * Si on est sender de la friend request, 
+     *      -> il faut ajouter l'ami dans la liste d'ami, si on est receiver
+     *      -> sinon il faut juste toggle le state is_friend à true.
      * 
      * @param to_add
-     * @param sender
+     * @param sender        Définit si on est l'initiateur de la friend_request ou pas
      */
-    public boolean add_friend(User to_add, boolean sender) {
+    public boolean add_friend(User new_friend_user, boolean sender) {
         int id_to_add = -1;
 
+        // "Early-return" si on est sender
         if(sender) {
             // On est l'envoyeur, on doit ajouter l'ami dans notre liste d'ami
-            Friend new_friend = new Friend(to_add);
+            Friend new_friend = new Friend(new_friend_user);
             new_friend.friendify();
             friends[friend_number] = new_friend;
             friend_number++;
@@ -122,7 +112,7 @@ public class User {
             return true;
         }
 
-        // Sous entendu si on est receiver
+        // Sous entendu ici, si on est receiver grâce au early return
 
         for(int i = 0; i < this.friend_number; i++) {
             Friend friend = friends[i];
@@ -130,7 +120,7 @@ public class User {
         
             // !friend.is_friend() => c'est une friend request
             // friend_user....     => c'est le username de la personne qu'on ne souhaite pas accepter
-            if(!friend.is_friend() && friend_user.get_username().equals(to_add.get_username())) {
+            if(!friend.is_friend() && friend_user.get_username().equals(new_friend_user.get_username())) {
                 id_to_add = i;
             }
         }
@@ -143,13 +133,20 @@ public class User {
     }
 
 
+    /**
+     * Permet d'envoyer un message à un ami. Sur un message on a deux user un sender
+     * et nun receiver. On doit donc spécifier à l'appel de la méthode si l"utilisateur courant
+     * est sender ou receiver.
+     * 
+     * @param message
+     * @param is_sender
+     * @return
+     */
     public boolean send_message(Message message, boolean is_sender) {
         User to_search;
 
-        if(is_sender) 
-            to_search = message.sender;    
-        else
-            to_search = message.receiver;
+        // Si on est sender, on recupère le sender du message sinon on recupère le receiver
+        to_search = (is_sender) ? message.sender : message.receiver;
 
         for(int i = 0; i < this.friend_number; i++) {
             if(friends[i].user.get_username().equals(to_search.get_username())) {
@@ -162,9 +159,19 @@ public class User {
     }
 
 
+    /**
+     * Permet de récupérer tous les messages recus par un utilisateur, en vérifiant au passage
+     * si la position demandé du message (0,1,2...) est dans le tableau ET en vérifiant qu'on est
+     * bien ami avec l'utilisateur demandé.
+     * 
+     * @param friend_user
+     * @param position
+     * @return
+     */
     public ArrayList<Message> get_messages(User friend_user, int position) {
         Friend friend = null;
 
+        // On cherche si cet utilisateur est parmi nos amis
         for(int i = 0; i < this.friend_number; i++) {
             if(friends[i].user.get_username().equals(friend_user.get_username())) {
                 friend = friends[i];

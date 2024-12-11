@@ -8,6 +8,13 @@ import java.net.SocketException;
 
 import com.server.Models.User;
 
+/**
+ * La classe Server gère tout ce qui a attrait au serveur, c'est à dire entre autre 
+ * - écouter sur le port Server.PORT
+ * - récupérer les messages du clients 
+ * - envoyer les réponses générées par les action au client  
+ * - conserver le tableau contenant les utilisateurs.
+ */
 public class Server {
 
     public static int PORT = 1337;
@@ -27,6 +34,9 @@ public class Server {
     
     public Server() {
         users = new User[Server.MAX_USERS];
+
+        // Le router a besoin de l'instance courante de serveur
+        // afin de bénéficier du tableau d'utilisateur etc
         router = new Router(this);
     }
 
@@ -37,7 +47,7 @@ public class Server {
      * @throws SocketException
      * @throws IOException
      */
-    public void run() throws SocketException, IOException {
+    public void listen() throws SocketException, IOException {
         this.socket = new DatagramSocket(Server.PORT, InetAddress.getByName("0.0.0.0"));
         System.out.println("[*] Server listening on udp://0.0.0.0:" + Server.PORT);
         
@@ -46,25 +56,25 @@ public class Server {
 
         while(true) {
             // On récupère le message envoyé par le client
-            String received_message = get_client_message();
+            String received_message = get_client_datagram();
 
             // To send contiendra le message à envoyer au client 
-            byte[] to_send = this.get_to_send_packet(received_message);
+            byte[] to_send = this.get_to_send_datagram(received_message);
             
             // On envoi au client
-            send_packet(to_send);
+            send_datagram(to_send);
         }
     }
 
 
     /**
      * Génére et return la réponse du serveur en fonction du message 
-     * envoyé par le client
+     * envoyé par le client et de l'action à utiliser dans ce cas
      * 
      * @param client_message        Message du client (ex: connexion,test,test)
      * @return
      */
-    public byte[] get_to_send_packet(String client_message) {
+    public byte[] get_to_send_datagram(String client_message) {
 
         String[] words = client_message.split(",");
         String to_send = this.router.get_server_response(words);
@@ -73,21 +83,14 @@ public class Server {
         return to_send.getBytes();
     }
 
- 
-    /* --------------------- UTILS --------------------- */
-    /*                                                   */
-    /*     Fonctions utiles permettant de faciliter      */
-    /*     la phase de développement                     */
-    /*                                                   */
-    /* ------------------------------------------------- */
 
     /**
-     * Permet d'envoyer un messages au client UDP
+     * Permet d'envoyer un datagramme au client UDP
      * 
      * @param sent_bytes
      * @throws IOException
      */
-    public void send_packet(byte[] sent_bytes) throws IOException {
+    public void send_datagram(byte[] sent_bytes) throws IOException {
         InetAddress client_addr = this.received.getAddress();
         int client_port = this.received.getPort();
 
@@ -101,13 +104,20 @@ public class Server {
      * @return
      * @throws IOException
      */
-    public String get_client_message() throws IOException {
+    public String get_client_datagram() throws IOException {
         this.received = new DatagramPacket(this.received_bytes, this.received_bytes.length);
         this.socket.receive(this.received);
 
         // Récupération du message envoyé par le client
         return new String(this.received.getData(), 0, this.received.getLength()).strip();
     }
+
+    
+    /* --------------------- UTILS --------------------- */
+    /*                                                   */
+    /*                 Fonctions utiles                  */
+    /*                                                   */
+    /* ------------------------------------------------- */
 
 
     /**
@@ -127,20 +137,6 @@ public class Server {
 
         return -1;
     }
-
-
-    /**
-     * Fonction permettant d'afficher le contenu du tableau users[] sous un format
-     * lisible
-     */
-    public void leak_db() {
-        System.out.println("---------------------------");
-        for(int i = 0; i <= this.user_number; i++)
-            if(users[i] != null)    
-                System.out.println(this.users[i].get_username());
-        System.out.println("---------------------------");
-    }
-
 
     public void close() {
         if(!socket.isClosed()) socket.close();

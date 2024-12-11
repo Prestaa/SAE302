@@ -1,4 +1,4 @@
-package com.server.Services;
+package com.server.Actions;
 
 import com.server.Server;
 import com.server.Models.Friend;
