@@ -19,7 +19,7 @@ public class Main {
         Server server = new Server();
 
         try {
-            server.run();
+            server.listen();
         } catch(SocketException e) {
             System.out.println("[ERROR] " + e);
         } catch(Exception e) {

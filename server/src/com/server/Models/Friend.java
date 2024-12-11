@@ -12,6 +12,9 @@ public class Friend {
         this.user = user;
     }
 
+    /**
+     * Toggle is_friend to true
+     */
     public void friendify() {
         is_friend = true;
     }

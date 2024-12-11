@@ -1,7 +1,6 @@
 package com.server.Models;
 
 public class Message {
-    public boolean read = false;
     public User sender;
     public User receiver;
     public String body;
