@@ -35,6 +35,8 @@ public class SupprimerAmi {
             user.friends[i] = user.friends[i+1];
         }
 
+        user.friend_number--;
+
         return "reponse,supprimer_ami,login,ami,ok\n";
     }
 }

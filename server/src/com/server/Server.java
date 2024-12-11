@@ -155,6 +155,7 @@ public class Server {
         for(int i = id; i <= user_number - 1; i++) {
             users[i] = users[i+1];
         }
+        this.user_number--;
 
         return true;
     }
