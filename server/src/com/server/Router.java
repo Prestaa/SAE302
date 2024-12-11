@@ -122,6 +122,7 @@ public class Router {
         }
         else if(words[0].equals("")) { to_send = ""; }
 
+        System.out.println(to_send);
         return to_send;
     }
 }
