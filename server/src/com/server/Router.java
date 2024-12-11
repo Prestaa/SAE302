@@ -23,7 +23,7 @@ public class Router {
 
         if(words[0].equals("inscription")) {
             Signup signup = new Signup(server);
-
+			System.out.println("INSCRIPTION");
             to_send = "reponse,inscription,erreur\n";
 
             if(words.length >= 3)

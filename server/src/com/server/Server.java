@@ -38,7 +38,7 @@ public class Server {
      * @throws IOException
      */
     public void run() throws SocketException, IOException {
-        this.socket = new DatagramSocket(Server.PORT);
+        this.socket = new DatagramSocket(Server.PORT, InetAddress.getByName("0.0.0.0"));
         System.out.println("[*] Server listening on udp://0.0.0.0:" + Server.PORT);
         
         // Tableau dans lequel on mettera les bytes envoyés par le client
