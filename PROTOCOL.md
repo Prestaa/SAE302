@@ -212,6 +212,9 @@ envoi_message,login,receveur,message
 # Exemple
 # A envoi un message à B
 envoi_message,b,a,Salut
+
+# A envoi un message en broadcast
+envoi_message,b,tous,Broadcast test
 ```
 
 > **client ⬅️ serveur**
