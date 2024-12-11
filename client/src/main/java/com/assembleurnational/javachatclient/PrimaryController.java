@@ -73,11 +73,11 @@ public class PrimaryController {
 
                 if (messplit.length > 3 && "ok".equals(messplit[3].trim())) {
                     Alert a = new Alert(AlertType.CONFIRMATION);
-                    a.setContentText("Inscription réussie");
+                    a.setContentText("Registration successful");
                     a.show();
                 } else {
                     Alert a = new Alert(AlertType.ERROR);
-                    a.setContentText("Inscription échouée: " + message);
+                    a.setContentText("Registration failed: " + message);
                     a.show();
                 }
             } catch (SocketTimeoutException e) {

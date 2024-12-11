@@ -10,23 +10,18 @@
    <children>
       <MenuBar>
         <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="disconnectButton" mnemonicParsing="false" onAction="#disconnect" text="Disconnect" />
+            </items>
+          </Menu>
             <Menu mnemonicParsing="false" text="Friends">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#addFriendView" text="Add Friend" />
-                  <MenuItem mnemonicParsing="false"  text="Delete Friend" />
-                  <MenuItem mnemonicParsing="false"  text="Manage Friend Requests" />
+                  <MenuItem mnemonicParsing="false" text="Delete Friend" />
+                  <MenuItem mnemonicParsing="false" onAction="#friendRequestsView" text="Manage Friend Requests" />
               </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />

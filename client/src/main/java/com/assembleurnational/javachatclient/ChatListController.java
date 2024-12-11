@@ -20,6 +20,7 @@ public class ChatListController {
 
     @FXML
     public void initialize() {
+        
         fetchAndDisplayFriends();
     }
 
@@ -99,5 +100,15 @@ public class ChatListController {
     @FXML
     private void addFriendView() throws IOException {
         App.setRoot("addFriend");
+    }
+
+    @FXML
+    private void friendRequestsView() throws IOException {
+        App.setRoot("friendRequests");
+    }
+
+    @FXML
+    private void disconnect() throws IOException {
+        App.setRoot("primary");
     }
 }

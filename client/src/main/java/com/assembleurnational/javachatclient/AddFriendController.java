@@ -71,4 +71,9 @@ public class AddFriendController {
             a.show();
         }
     }
+    
+    @FXML
+    private void back() throws IOException {
+        App.setRoot("chatList");
+    }
 }
