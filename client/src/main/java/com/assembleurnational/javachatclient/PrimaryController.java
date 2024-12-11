@@ -5,7 +5,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
-import java.util.Arrays;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -16,7 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class PrimaryController {
 
-    public String username;
+    public static String username;
     public String password;
 
     @FXML
@@ -105,7 +104,7 @@ public class PrimaryController {
             return;
         }
 
-        String loginMessage = "connexion" + "," + username + "," + password;
+        String loginMessage = "connexion," + username + "," + password;
 
         try (DatagramSocket socket = new DatagramSocket()) {
             // Set connection timeout to 5 seconds (5000 milliseconds)
