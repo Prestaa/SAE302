@@ -25,6 +25,7 @@ public class Server {
     private DatagramSocket socket;
     private DatagramPacket received;
     private DatagramPacket sent;
+
     
     private byte[] received_bytes;
     public int user_number = 0;
@@ -138,7 +139,28 @@ public class Server {
         return -1;
     }
 
+
+    public boolean delete_user(User user) {
+        int id = -1;
+        for(int i = 0; i <= user_number; i++) {
+            if(users[i].get_username().equals(user.get_username())) {
+                id = i;
+                break;
+            }
+        }
+
+        if(id == -1) 
+            return false;
+
+        for(int i = id; i <= user_number - 1; i++) {
+            users[i] = users[i+1];
+        }
+
+        return true;
+    }
+
     public void close() {
         if(!socket.isClosed()) socket.close();
     }
+
 }
