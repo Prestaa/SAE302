@@ -19,8 +19,6 @@ public class GetMessage {
     }
 
     public String action(String user, String friend, String str_position) {
-        System.out.println("USER" + user);
-
         String error_message = "reponse,demande_message,null,null,null,null,erreur\n";
         int user_id = server.username_to_id(user);
         int friend_id = server.username_to_id(friend);
@@ -44,6 +42,10 @@ public class GetMessage {
         String suite = "non";
         if(position < messages.size()) {
             suite = "oui";
+        }
+        System.out.println(user_user.get_username());
+        for (Message message : messages) {
+            System.out.println(message.body);
         }
         Message message = messages.get(position);
 

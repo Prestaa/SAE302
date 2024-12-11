@@ -146,10 +146,13 @@ public class User {
         User to_search;
 
         // Si on est sender, on recupère le sender du message sinon on recupère le receiver
-        to_search = (is_sender) ? message.sender : message.receiver;
+        to_search = (is_sender) ? message.receiver : message.sender;
+
+        System.out.println(username + ", " + is_sender);
 
         for(int i = 0; i < this.friend_number; i++) {
             if(friends[i].user.get_username().equals(to_search.get_username())) {
+                //System.out.println("Je suis " + get_username() + " j'add dans le tableau de " + friends[i].user.get_username());
                 friends[i].message.add(message);
                 return true;
             }
@@ -183,5 +186,23 @@ public class User {
         }
 
         return friend.message;
+    }
+
+
+    public void leak_db() {
+        //System.out.println("USERNAME: " + username + " PASSWORD: " + password);
+        //System.out.println("-------------------------------------");
+        for (int i = 0; i < friend_number; i++) {
+            Friend tmp_friend = friends[i];
+            
+            if(!tmp_friend.is_friend())
+                continue;
+            
+            //System.out.println("EST AMI: " + tmp_friend.user.username);
+            //System.out.println("\nMESSAGE --");
+            for (Message message : tmp_friend.message) {
+                //System.out.println(message.sender.get_username() + " a dit " + message.body);
+            }
+        }
     }
 } 

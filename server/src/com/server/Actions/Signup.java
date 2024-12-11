@@ -23,7 +23,8 @@ public class Signup {
      */
     public String action(String login, String password) {
         // Si on a atteint le quota max d'utilisateurs inscrits
-        if(server.user_number >= Server.MAX_USERS) 
+        // On reserve les mots clés tous et null
+        if(server.user_number >= Server.MAX_USERS || login.equals("null") || login.equals("tous")) 
             return "reponse,inscription,null,erreur\n";
 
         // Si l'utilisateur existe déjà OU que le login/password est vide

@@ -15,12 +15,12 @@ public class GetFriend {
     }
 
     public String action(String username) {
-        String to_send = "reponse,recuperer_amis," + username + "";
+        String to_send = "reponse,recuperer_amis," + username + "\n";
 
         int user_id = server.username_to_id(username);
 
         if(user_id == -1)
-            return "reponse,recuperer_amis," + username + ",null,null,null,null,null,null,null,null,null,null,erreur";
+            return "reponse,recuperer_amis," + username + ",null,null,null,null,null,null,null,null,null,null,erreur\n";
 
         // Moi
         User user = server.users[user_id];

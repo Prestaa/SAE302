@@ -21,9 +21,9 @@ public class Main {
         try {
             server.listen();
         } catch(SocketException e) {
-            System.out.println("[ERROR] " + e);
+            //System.out.println("[ERROR] " + e);
         } catch(Exception e) {
-            System.out.println("[ERROR] " + e);
+            //System.out.println("[ERROR] " + e);
         }
         server.close();
     }
