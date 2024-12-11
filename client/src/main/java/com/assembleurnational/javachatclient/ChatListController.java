@@ -47,7 +47,7 @@ public class ChatListController {
             DatagramPacket sendPacket = new DatagramPacket(sentBytes, sentBytes.length, serverAddress, serverPort);
             socket.send(sendPacket);
     
-            // Receive server response
+            // Receive server reponse
             byte[] receiveBytes = new byte[256];
             DatagramPacket receivePacket = new DatagramPacket(receiveBytes, receiveBytes.length);
     
@@ -78,7 +78,7 @@ public class ChatListController {
                         showErrorAlert("Fetching failed: " + message);
                     }
                 } else {
-                    showErrorAlert("Unexpected server response format: " + message);
+                    showErrorAlert("Unexpected server reponse format: " + message);
                 }
             } catch (SocketTimeoutException e) {
                 showErrorAlert("Connection timed out. Please try again later.");

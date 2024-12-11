@@ -41,7 +41,7 @@ public class AddFriendController {
             DatagramPacket sendPacket = new DatagramPacket(sentBytes, sentBytes.length, serverAddress, serverPort);
             socket.send(sendPacket);
 
-            // Receive server response
+            // Receive server reponse
             byte[] receiveBytes = new byte[256];
             DatagramPacket receivePacket = new DatagramPacket(receiveBytes, receiveBytes.length);
 

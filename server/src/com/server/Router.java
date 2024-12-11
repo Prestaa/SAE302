@@ -2,6 +2,7 @@ package com.server;
 
 // Authentification
 import com.server.Actions.Signup;
+import com.server.Actions.SupprimerAmi;
 import com.server.Actions.Login;
 
 // Gestion des amis
@@ -37,7 +38,7 @@ public class Router {
      * @param words
      * @return
      */
-    public String get_server_response(String[] words) {
+    public String get_server_reponse(String[] words) {
         
         String to_send = "reponse,null,null\n";
 
@@ -125,10 +126,18 @@ public class Router {
             
             DeleteAccount deleteAccount = new DeleteAccount(server);
 
-            to_send = "response,delete,login,erreur\n";
-            if(words.length >= 3){
+            to_send = "reponse,delete,login,erreur\n";
+            if(words.length >= 3)
                 to_send = deleteAccount.action(words[1], words[2]); 
-            }
+        }
+        else if(words[0].equals("supprimer_ami")) {
+            System.out.println("[DEBUG] SUPRESSION d'un ami");
+            
+            SupprimerAmi supprimerAmi = new SupprimerAmi(server);
+
+            to_send = "reponse,supprimer_ami,login,ami,erreur\n";
+            if(words.length >= 3)
+                to_send = supprimerAmi.action(words[1], words[2]); 
         }
         else if(words[0].equals("")) { to_send = ""; }
 

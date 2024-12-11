@@ -108,6 +108,7 @@ recuperer_demande,login,id
 recuperer_demande,test,0
 ```
 
+
 > **client ⬅️ serveur**
 <br>
 
@@ -131,6 +132,32 @@ si on n'a pas d'ami de demande d'ami:
 ```
 reponse,recuperation_demande,login,demandeur,pas_de_demande_ami
 ```
+
+
+### Supression d'un ami
+> **client ➡️ serveur**
+```bash
+supprimer_ami,login,ami
+```
+
+
+> **client ⬅️ serveur**
+<br>
+
+si ok:
+```bash
+reponse,supprimer_ami,login,ami,ok
+```
+
+<br>
+
+si pas ok:
+- Login / Ami n'existe pas / est vide 
+- Ami n'est pas un ami
+```bash
+reponse,supprimer_ami,login,ami,erreur
+```
+
 
 
 ### Acceptation d'une demande d'ami
@@ -268,8 +295,9 @@ reponse,demande_message,login,ami,envoyeur,message,erreur
 ```
 
 
-## Supprimer son compte
+## Gestion de son compte
 
+### Suppression du compte
 > **client ➡️ serveur**
 ```bash
 supprimer,login,password
@@ -281,7 +309,7 @@ supprimer,login,password
 
 si ok:
 ```bash
-response,delete,login,ok
+reponse,delete,login,ok
 ```
 
 <br>
@@ -290,6 +318,6 @@ si pas ok:
 - Login/Receveur n'existe pas / est vide 
 - Pas ami avec receveur
 ```bash
-response,delete,login,erreur
+reponse,delete,login,erreur
 ```
 
