@@ -17,11 +17,15 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("primary"));
         stage.setScene(scene);
-        stage.sizeToScene(); 
+
+        stage.sizeToScene();
+        stage.setResizable(false); 
+
+        stage.setTitle("JavaChat Client"); 
         stage.show();
-    } 
+    }
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
@@ -35,5 +39,4 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }
