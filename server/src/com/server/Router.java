@@ -8,7 +8,7 @@ import com.server.Actions.Login;
 import com.server.Actions.SendFriendRequest;
 import com.server.Actions.GetFriendRequest;
 import com.server.Actions.AcceptFriendRequest;
-
+import com.server.Actions.DeleteAccount;
 import com.server.Actions.GetFriend;
 
 // Gestion des messages
@@ -119,6 +119,16 @@ public class Router {
             to_send = "reponse,demande_message,erreur\n";
             if(words.length >= 4)
                 to_send = getMessage.action(words[1], words[2], words[3]);    
+        }
+        else if(words[0].equals("delete")) {
+            System.out.println("[DEBUG] SUPRESSION d'un utilisateur");
+            
+            DeleteAccount deleteAccount = new DeleteAccount(server);
+
+            to_send = "response,delete,login,erreur\n";
+            if(words.length >= 3){
+                to_send = deleteAccount.action(words[1], words[2]); 
+            }
         }
         else if(words[0].equals("")) { to_send = ""; }
 

@@ -267,3 +267,29 @@ si pas ok:
 reponse,demande_message,login,ami,envoyeur,message,erreur
 ```
 
+
+## Supprimer son compte
+
+> **client ➡️ serveur**
+```bash
+supprimer,login,password
+```
+
+> **client ⬅️ serveur**
+
+<br>
+
+si ok:
+```bash
+response,delete,login,ok
+```
+
+<br>
+
+si pas ok:
+- Login/Receveur n'existe pas / est vide 
+- Pas ami avec receveur
+```bash
+response,delete,login,erreur
+```
+
