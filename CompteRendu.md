@@ -79,12 +79,20 @@ Le boutton pour *Supprimer* n'est pas encore fonctionnel côté client.
 
 <img src="AjoutAmi.jpg" alt="Ajout d'un ami" width="310"/>
 
+![Chat sur client Android](chatandroid.jpg)
+
+Le Client Android met à jour les messages reçus seulement lorsque le boutton afficher messages est cliqué. Au total, 8 messages peuvent être stockés sur le client Android.
+
 ## Client PC JavaChat
 
 Le client PC fut créer avec JavaFX sur VSCode. Il contient les mêmes fonctionalités que le client Android, mais est dynamique.
 
 <img src="ClientPClogin.png" alt="Login sur le client PC" width="390"/>
+
 Client PC se connecte sur son compte
 
-<img src="ChatPC.png" alt="Chat sur le client PC" width="390"/>
+![Chat entre 2 amis](ChatPC.png)
+
 Chat lancé entre 2 amis sur le client PC
+
+Le Client met à jour les messages reçus toutes les 10 secondes. Une infinité de messages sont stockés sur le client PC
