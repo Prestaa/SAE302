@@ -70,16 +70,21 @@ Le serveur peut être tester avec ``script.py``
 
 Le client peut être lancer dans l'émulateur *Android Studio* ou en téléchargeant l'APK sur son smartphone.
 
-L'utilisateur peut créer son compte en cliquant sur *Sign Up*.
 
 <img src="UserCreate.jpg" alt="Création d'un utilisateur" width="310"/>
+
+L'utilisateur peut créer son compte en cliquant sur *Sign Up*.
+
+<img src="AjoutAmi.jpg" alt="Ajout d'un ami" width="310"/>
 
 L'utilisateur peut se connecter sur la page d'accueil puis ajouter des amis en indiquant son ID et en cliquant sur *Ajouter*.
 Le boutton pour *Supprimer* n'est pas encore fonctionnel côté client.
 
-<img src="AjoutAmi.jpg" alt="Ajout d'un ami" width="310"/>
+<img src="chatandroid.jpg" alt="Chat sur client Android" width="310"/>
 
-![Chat sur client Android](chatandroid.jpg)
+
+
+
 
 Le Client Android met à jour les messages reçus seulement lorsque le boutton afficher messages est cliqué. Au total, 8 messages peuvent être stockés sur le client Android.
 
@@ -93,6 +98,5 @@ Client PC se connecte sur son compte
 
 ![Chat entre 2 amis](ChatPC.png)
 
-Chat lancé entre 2 amis sur le client PC
-
-Le Client met à jour les messages reçus toutes les 10 secondes. Une infinité de messages sont stockés sur le client PC
+Chat lancé entre 2 amis sur le client PC.
+Le Client met à jour les messages reçus toutes les 10 secondes. Une infinité de messages sont stockés sur le client PC.
