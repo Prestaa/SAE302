@@ -64,3 +64,21 @@ python3 script.py
 # Ou en plus bas level
 nc -vu 127.0.0.1 1337
 ```
+Le serveur peut être tester avec ``script.py``
+
+## Client Android JavaChat
+
+Le client peut être lancer dans l'émulateur *Android Studio* ou en téléchargeant l'APK sur son smartphone.
+
+L'utilisateur peut créer son compte en cliquant sur *Sign Up*.
+
+<img src="UserCreate.jpg" alt="Création d'un utilisateur" width="310"/>
+
+L'utilisateur peut se connecter sur la page d'accueil puis ajouter des amis en indiquant son ID et en cliquant sur *Ajouter*.
+Le boutton pour *Supprimer* n'est pas encore fonctionnel côté client.
+
+<img src="AjoutAmi.jpg" alt="Ajout d'un ami" width="310"/>
+
+## Client PC JavaChat
+
+Le client PC 
