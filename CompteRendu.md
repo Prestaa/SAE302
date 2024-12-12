@@ -42,3 +42,25 @@ Mardi, Anas avança sur le serveur avec Bastien, pendant que Romain et Enzo trav
 Mercredi, nous avons terminer officielement le serveur avec toutes ses fonctionalités. Enzo commença à créer le client pour PC en utilisant JavaFX sur VSCode, permettant d'implémenter facilement un GUI. Nous avons continué d'améliorer le Client Android, nous demandant plus d'effort.
 
 Jeudi, nous avons compléter le cahier des charges ainsi que commencer à rédiger le compte-rendu ainsi qu'à préparer la présentation.
+
+## Serveur JavaChat
+
+Pour pouvoir compiler il faut la dépendence *Ant*, *make* sera nécessaire pour automatiser et Java23 pour le lancer.
+
+Le serveur à pour package .com.server. et écoutera sur le port 1337.
+
+Pour lancer le serveur faire
+```bash
+make
+```
+dans le dossier `./source`
+
+Il existe trois manières pour intéragir avec le serveur : 
+```
+# Interagir avec le serveur
+make client
+# Ou via le script prévu à cet effet
+python3 script.py
+# Ou en plus bas level
+nc -vu 127.0.0.1 1337
+```
