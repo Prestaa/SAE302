@@ -82,3 +82,9 @@ Le boutton pour *Supprimer* n'est pas encore fonctionnel côté client.
 ## Client PC JavaChat
 
 Le client PC fut créer avec JavaFX sur VSCode. Il contient les mêmes fonctionalités que le client Android, mais est dynamique.
+
+<img src="ClientPClogin.png" alt="Login sur le client PC" width="390"/>
+Client PC se connecte sur son compte
+
+<img src="ChatPC.png" alt="Chat sur le client PC" width="390"/>
+Chat lancé entre 2 amis sur le client PC
