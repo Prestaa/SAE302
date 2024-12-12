@@ -81,4 +81,4 @@ Le boutton pour *Supprimer* n'est pas encore fonctionnel côté client.
 
 ## Client PC JavaChat
 
-Le client PC 
+Le client PC fut créer avec JavaFX sur VSCode. Il contient les mêmes fonctionalités que le client Android, mais est dynamique.
