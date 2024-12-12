@@ -18,7 +18,7 @@
             <Menu mnemonicParsing="false" text="Friends">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#addFriendView" text="Add Friend" />
-                  <MenuItem mnemonicParsing="false" text="Delete Friend" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteFriendView" text="Delete Friend" />
                   <MenuItem mnemonicParsing="false" onAction="#friendRequestsView" text="Manage Friend Requests" />
               </items>
             </Menu>

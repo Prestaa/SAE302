@@ -140,6 +140,7 @@ public class ChatListController {
             if (!message.isEmpty()) {
                 chatInput.clear();
                 sendMessage(friend, message);
+                chatArea.appendText(username + ": " + message + "\n");
             }
         });
         String newMessages = getMessages(friend);
@@ -164,9 +165,9 @@ public class ChatListController {
         messagePoller = Executors.newSingleThreadScheduledExecutor();
         messagePoller.scheduleAtFixedRate(() -> {
             try {
-                String newMessages = getMessages(friend);
-                if (newMessages != null && !newMessages.isEmpty()) {
-                    Platform.runLater(() -> chatArea.setText(newMessages));
+                String messages = getMessages(friend);
+                if (messages != null && !messages.isEmpty()) {
+                    Platform.runLater(() -> chatArea.setText(messages));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -255,8 +256,8 @@ public class ChatListController {
                             id++;
                         } else {
                             if (id == 0) {
-                                showErrorAlert("Error fetching messages: " + response);
-                                suite = false;
+                                messages.replace(0, messages.length(), "No messages"); // Replace chatbox content by "No messages" if the server returns no messages for current user
+                                break;
                             } else {
                                 break;
                             }
@@ -276,6 +277,11 @@ public class ChatListController {
         }
 
         return messages.toString();
+    }
+
+    @FXML
+    private void deleteFriendView() throws IOException {
+        App.setRoot("deleteFriend");
     }
 
     @FXML
