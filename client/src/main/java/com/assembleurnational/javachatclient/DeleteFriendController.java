@@ -12,15 +12,15 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class AddFriendController {
+public class DeleteFriendController {
     @FXML
     private TextField friendInput;
 
     @FXML
-    private Button sendRequestButton;
+    private Button deleteFriendButton;
 
     @FXML
-    private void sendRequest() {
+    private void deleteFriend() {
         String friend = friendInput.getText();
         if (friend.isEmpty()) {
             Alert a = new Alert(AlertType.WARNING);
@@ -28,7 +28,7 @@ public class AddFriendController {
             a.show();
             return;
         }
-        String friendRequestMessage = "demande_ami," + PrimaryController.username + "," + friend;
+        String friendRequestMessage = "supprimer_ami," + PrimaryController.username + "," + friend;
     
         try (DatagramSocket socket = new DatagramSocket()) {
                 // Set connection timeout to 5 seconds (5000 milliseconds)
@@ -51,13 +51,13 @@ public class AddFriendController {
                     String message = new String(receivePacket.getData(), 0, receivePacket.getLength());
                     String[] messplit = message.split(",");
 
-                    if (messplit.length > 3 && "ok".equals(messplit[4].trim())) {
+                    if (messplit.length > 3 && "ok".equals(messplit[messplit.length-1].trim())) {
                         Alert a = new Alert(AlertType.CONFIRMATION);
-                        a.setContentText("Friend request sent successfully");
+                        a.setContentText("Friend deleted successfully");
                         a.show();
                     } else {
                         Alert a = new Alert(AlertType.ERROR);
-                        a.setContentText("Friend request failed: " + message);
+                        a.setContentText("Friend deletion failed: " + message);
                         a.show();
                     }
                 } catch (SocketTimeoutException e) {
