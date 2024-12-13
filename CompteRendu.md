@@ -1,7 +1,7 @@
 <div align="center">
 
 # Compte Rendu SAé 302
-## Développer des applications communicantes
+**Développer des applications communicantes**
 
 </div>
 
@@ -17,16 +17,15 @@ concevoir un protocole applicatif au-dessus de la pile de communication TCP/IP.
 3. Un message est une chaîne de caractères définit par une action/commande (INVITATION
 ou MESSAGE), par une origine, par le destinataire et par un corps de message.
 
-4. Chaque utilisateur est autorisé à avoir jusqu’à __x__ amis.
+4. Chaque utilisateur est autorisé à avoir jusqu’à 10 amis.
    
 5. Le serveur stocke les messages relatifs aux utilisateurs en mémoire RAM.
    
-6. Un nombre presque illimité de messages peuvent être stocker dans la mémoire RAM. _(Les précédents sont automatiquement supprimés.)_
+6. Un nombre illimité de messages peuvent être stockés dans la mémoire RAM. 
    
 7. Le destinataire du message peut être “TOUS” Dans ce cas, le serveur réplique le message vers tous les amis de l’émetteur. Semblable à un ***Broadcast***
    
-8. Pour consulter ses messages, l’utilisateur connecté doit envoyer un message de lecture de
-ses messages au format *“lecture,login”*. (côté client l’utilisateur lit les messages chaque
+8. Pour consulter ses messages, l’utilisateur connecté doit envoyer un message de lecture de ses messages au format *“lecture,login”*. (côté client l’utilisateur lit les messages chaque
 10 secondes).
 
 9. Pour inviter un autre utilisateur, l’invitant envoie un message *“demande_ami,login,ami”*.
@@ -48,28 +47,75 @@ Mercredi, nous avons terminer officielement le serveur avec toutes ses fonctiona
 
 Jeudi, nous avons compléter le cahier des charges ainsi que commencer à rédiger le compte-rendu ainsi qu'à préparer la présentation.
 
+
 ## Serveur JavaChat
 
-Pour pouvoir compiler il faut la dépendence *Ant*, *make* sera nécessaire pour automatiser et Java23 pour le lancer.
+### Architecture
 
-Le serveur à pour package .com.server. et écoutera sur le port 1337.
+Le backend est structuré selon le pattern d'architecture MVC. La terminologie utilisée (Action class, Router) est celle utilisée par le framework Laraveln qui est un framework MVC PHP que j'apprécie.
+<br>
+L'application se présente comme suit:
 
-Pour lancer le serveur faire
+```
+├── Actions
+│   ├── AcceptFriendRequest.java
+│   ├── DeleteAccount.java
+│   ├── GetFriend.java
+│   ├── GetFriendRequest.java
+│   ├── GetMessage.java
+│   ├── Login.java
+│   ├── SendFriendRequest.java
+│   ├── SendMessage.java
+│   ├── Signup.java
+│   └── SupprimerAmi.java
+│
+├── Models
+│   ├── Friend.java
+│   ├── Message.java
+│   └── User.java
+│
+├── Main.java
+├── Router.java
+└── Server.java
+```
+
+#### Server
+La classe Server sert avant tout à initier le serveur UDP et écouter sur le port 1337. C'est cette classe qui porte en elle le tableau d'utilisateurs, ainsi que quelques méthodes tel que:
+- `get_client_datagram()` Permet de récupérer le datagramme UDP envoyé par le client
+- `get_to_send_datagram()` Permet de générér la string (au format CSV) à envoyé au client. Pour ce faire cette classe va faire appel au "*Router*".
+- `send_datagram()` Permet d'envoyer un datagramme UDP au client
+
+#### Router
+La classe "router" permet d'effectuer le mapping entre la commande envoyé par le client, et l'action à appeler.
+
+#### Actions
+Les actions sont l'équivalents des controllers du modèle MVC. Cependant dans notre cas ils n'effectuent qu'une seule tâche. Dans le framework Laravel on nomme cela des "Action Class". C'est pour cela que j'ai choisi de conserver la terminologie en les nommant Actions. On voit qu'on a basiquement une Action par commande, ce qui permet de rendre notre code extrêmement modulable. Si on souhaite ajouter une nouvelle commande, il suffit de créer l'Action qui lui est associé, et de créer la "Route" qui map la commande souhaitée à l'action.
+
+#### Models
+Les models sont basiquement des classes qui permettent d'encapsuler de la données. Dans notre cas nous avons trois modèles.
+
+- User.java
+Contient le login, le password, ainsi qu'un tableau d'amis.
+
+- Friend.java
+Contient le `User ami`, un booleen qui nous permet de savoir si il est ami ou si c'est une demande d'ami ainsi qu'un tableau de message.
+
+- Message.java
+Contient un `User envoyeur`, un `User receveur` ainsi que le contenu du message.
+
+### Compilation
+
+Pour lancer le serveur faire, aller à la racine du projet et faire
+
 ```bash
 make
 ```
-dans le dossier `./source`
 
-Il existe trois manières pour intéragir avec le serveur : 
+Pour lancer les tests avec le script python on peut faire
 ```bash
-# Avec le client
-make client
 # Ou via le script prévu à cet effet
 python3 script.py
-# Ou en plus bas level
-nc -vu 127.0.0.1 1337
 ```
-Le serveur peut être testé avec ``script.py``
 
 ## Client Android JavaChat
 
