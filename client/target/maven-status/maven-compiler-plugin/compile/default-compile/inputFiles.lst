@@ -1,4 +1,8 @@
-/home/anas/SAE302/client/src/main/java/com/assembleurnational/javachatclient/PrimaryController.java
-/home/anas/SAE302/client/src/main/java/com/assembleurnational/javachatclient/App.java
-/home/anas/SAE302/client/src/main/java/com/assembleurnational/javachatclient/SettingsController.java
-/home/anas/SAE302/client/src/main/java/module-info.java
+/home/enzo/SAE302/client/src/main/java/com/assembleurnational/javachatclient/PrimaryController.java
+/home/enzo/SAE302/client/src/main/java/com/assembleurnational/javachatclient/ChatListController.java
+/home/enzo/SAE302/client/src/main/java/module-info.java
+/home/enzo/SAE302/client/src/main/java/com/assembleurnational/javachatclient/App.java
+/home/enzo/SAE302/client/src/main/java/com/assembleurnational/javachatclient/AddFriendController.java
+/home/enzo/SAE302/client/src/main/java/com/assembleurnational/javachatclient/FriendRequestsController.java
+/home/enzo/SAE302/client/src/main/java/com/assembleurnational/javachatclient/DeleteFriendController.java
+/home/enzo/SAE302/client/src/main/java/com/assembleurnational/javachatclient/SettingsController.java

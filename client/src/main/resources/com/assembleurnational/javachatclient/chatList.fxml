@@ -22,11 +22,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#friendRequestsView" text="Manage Friend Requests" />
               </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
         </menus>
       </MenuBar>
       <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" />

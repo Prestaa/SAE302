@@ -56,15 +56,15 @@ make
 dans le dossier `./source`
 
 Il existe trois manières pour intéragir avec le serveur : 
-```
-# Interagir avec le serveur
+```bash
+# Avec le client
 make client
 # Ou via le script prévu à cet effet
 python3 script.py
 # Ou en plus bas level
 nc -vu 127.0.0.1 1337
 ```
-Le serveur peut être tester avec ``script.py``
+Le serveur peut être testé avec ``script.py``
 
 ## Client Android JavaChat
 
@@ -92,11 +92,20 @@ Le Client Android met à jour les messages reçus seulement lorsque le boutton a
 
 Le client PC fut créer avec JavaFX sur VSCode. Il contient les mêmes fonctionalités que le client Android, mais est dynamique.
 
+![alt text](image.png)
+Configuration des paramètres de connexion au serveur : Adresse IP et Port
+
 <img src="ClientPClogin.png" alt="Login sur le client PC" width="390"/>
 
 Client PC se connecte sur son compte
 
+
+![alt text](Screenshot_20241213_085708.png)
+
+Page de dialogue de demande d'ami : On peut soit accepter soit refuser la demande.
+
+
 ![Chat entre 2 amis](ChatPC.png)
 
 Chat lancé entre 2 amis sur le client PC.
-Le Client met à jour les messages reçus toutes les 10 secondes. Une infinité de messages sont stockés sur le client PC.
+Le Client met à jour les messages reçus toutes les 10 secondes. Une infinité de messages sont stockés sur le client PC (du moins jusqu'au remplissage de la RAM de la JVM).
