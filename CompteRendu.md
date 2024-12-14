@@ -52,7 +52,7 @@ Jeudi, nous avons compléter le cahier des charges ainsi que commencer à rédig
 
 ### Architecture
 
-Le backend est structuré selon le pattern d'architecture MVC. La terminologie utilisée (Action class, Router) est celle utilisée par le framework Laraveln qui est un framework MVC PHP que j'apprécie.
+Le backend est structuré selon le pattern d'architecture MVC. La terminologie utilisée (Action class, Router) est celle utilisée par le framework Laravel qui est un framework MVC PHP que avec lequel nous avions déjà travaillé lors d'une précédente SAé.
 <br>
 L'application se présente comme suit:
 
