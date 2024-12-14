@@ -141,7 +141,35 @@ Le Client Android met à jour les messages reçus seulement lorsque le boutton a
 
 ## Client PC JavaChat
 
-Le client PC fut créer avec JavaFX sur VSCode. Il contient les mêmes fonctionalités que le client Android, mais est dynamique.
+Le client PC fut créé avec JavaFX sur VSCode. Il contient les mêmes fonctionalités que le client Android, mais est dynamique.
+
+Le client est structuré de la manière suivante :
+
+
+```
+src/
+└── main/
+    ├── java/
+    │   └── com/assembleurnational/javachatclient/
+    │       ├── AddFriendController.java
+    │       ├── App.java
+    │       ├── ChatListController.java
+    │       ├── DeleteFriendController.java
+    │       ├── FriendRequestsController.java
+    │       ├── PrimaryController.java
+    │       └── SettingsController.java
+    └── resources/
+        ├── addFriend.fxml
+        ├── chatList.fxml
+        ├── deleteFriend.fxml
+        ├── friendRequests.fxml
+        ├── primary.fxml
+        └── settings.fxml
+
+```
+
+D'une part, les fichiers `.java` contiennent le code de chaque page du client. D'autre part, les fichiers `.fxml` contiennent la disposition des éléments sur les pages, ce qui peut s'apparenter au fonctionnement d'Android Studio.
+
 
 ![alt text](image.png)
 Configuration des paramètres de connexion au serveur : Adresse IP et Port
@@ -160,3 +188,13 @@ Page de dialogue de demande d'ami : On peut soit accepter soit refuser la demand
 
 Chat lancé entre 2 amis sur le client PC.
 Le Client met à jour les messages reçus toutes les 10 secondes. Une infinité de messages sont stockés sur le client PC (du moins jusqu'au remplissage de la RAM de la JVM).
+
+### Compilation
+
+Pour lancer le client, aller à la racine du projet et faire
+
+```bash
+make client
+```
+
+Note: Apache Ant est nécessaire au lancement du client.
