@@ -56,11 +56,14 @@ reponse,connexion,login,ok
 
 si pas ok:
 - Login n'existe pas / est vide 
-- Le mot de passe ne correspond pas au login
-- Login avec une virgule dedans
+- Le mot de passe est incorrect
+- Login avec une `,` dedans
+
 ```bash
 reponse,connexion,login,erreur
 ```
+
+<br><br>
 
 ## Demande d'ami
 
@@ -70,7 +73,7 @@ reponse,connexion,login,erreur
 ```bash
 demande_ami,demandeur,receveur
 
-# exemple -> foo demande bar en ami
+# exemple: foo demande bar en ami
 demande_ami,foo,bar
 ```
 
@@ -90,21 +93,24 @@ si pas ok:
 - Le receveur est déjà ami avec le demandeur
 - L'utilisateur a atteint le nombre maximal d'ami
 - L'utilisateur essaye de s'ajouter en ami
+
 ```bash
 reponse,demande_ami,login,erreur
 ```
 
+<br><br>
+
 ### Récupération des demandes d'amis
-> Donne moi les demandes d'amis qui me concerne
-> demandeur = celui qui demande en ami
+Récupération des personnes qui nous demandent en ami
+<br>
 
 > **client ➡️ serveur**
 ```bash
 recuperer_demande,login,id
 
-# Étant donné qu'on peut avoir plusieurs demande d'ami on les indexe par ID
-# on déduit si on a d'autre ami en fonction de la réponse du serveur, dernier paramètre
-
+# Étant donné qu'on peut avoir plusieurs demande d'ami en cours, 
+# on les index par ID
+# exemple:
 recuperer_demande,test,0
 ```
 
@@ -115,26 +121,29 @@ recuperer_demande,test,0
 si ok:
 ```bash
 # La suite peut être égal à oui ou à non 
-# cela signifie qu'on a d'autre demande ou pas
+# cela permet de savoir si on a d'autre demande d'ami pas
 reponse,recuperation_demande,login,demandeur,suite
 ```
 
 <br>
 
 si pas ok:
-- Login n'existe pas / est vide 
+- Login/Demandeur n'existe pas / est vide 
+- Login/Demandeur contient une `,`
 ```bash
 reponse,recuperation_demande,login,demandeur,erreur
 ```
 
 <br>
-si on n'a pas d'ami de demande d'ami:
+si on n'a pas de demande d'ami:
 ```
 reponse,recuperation_demande,login,demandeur,pas_de_demande_ami
 ```
 
+<br><br>
 
 ### Supression d'un ami
+
 > **client ➡️ serveur**
 ```bash
 supprimer_ami,login,ami
@@ -158,7 +167,7 @@ si pas ok:
 reponse,supprimer_ami,login,ami,erreur
 ```
 
-
+<br><br>
 
 ### Acceptation d'une demande d'ami
 
@@ -182,14 +191,18 @@ reponse,accepter_demande,receveur,demandeur,ok
 <br>
 
 si pas ok: 
+
+<br>
+
 **Reponse en cas d'erreur:**
-- Demandeur n'a pas envoyé de demande d'ami
 - Receveur/Demandeur n'existe pas / est vide 
+- Demandeur n'a pas envoyé de demande d'ami
 
 ```bash
 reponse,accepter_demande,receveur,demandeur,erreur
 ```
 
+<br><br>
 
 ### Affichage de nos amis
 
@@ -212,21 +225,22 @@ reponse,recuperer_amis,username,ami1,ami2,ami3,ami4,ami5,ami6,ami7,ami8,ami9,ami
 
 <br>
 
-Les valeur de ami<x> seront `null` si on n'a pas d'ami. C'est à dire qu'un retour comme celui-ci sera envoyé:
+Les valeur de ami<x> seront `null` si on n'a pas d'ami, un retour comme celui-ci peut être observé:
 
 ```
-reponse,recuperer_amis,username,test1,user_x,test3,null,null,null,null,null,null,null
+reponse,recuperer_amis,username,Michel,John Doe,M.Spies,Hercule,null,null,null,null,null
 ```
 
 <br>
 si pas ok:
-- Si on n'a aucune demande d'ami acceptée
 - Receveur/Demandeur n'existe pas / est vide 
+- Receveur/Demande contient une `,`
 
 ```bash
 reponse,recuperer_amis,username,ami1,ami2,ami3,ami4,ami5,ami6,ami7,ami8,ami9,ami10,erreur
 ```
 
+<br><br>
 
 ## Gestion des messages
 
@@ -237,10 +251,10 @@ reponse,recuperer_amis,username,ami1,ami2,ami3,ami4,ami5,ami6,ami7,ami8,ami9,ami
 envoi_message,login,receveur,message
 
 # Exemple
-# A envoi un message à B
+# B envoi un message à A
 envoi_message,b,a,Salut
 
-# A envoi un message en broadcast
+# B envoi un message en broadcast (à tous ses amis)
 envoi_message,b,tous,Broadcast test
 ```
 
@@ -257,12 +271,15 @@ reponse,envoi_message,login,receveur,ok
 
 si pas ok:
 - Login/Receveur n'existe pas / est vide 
-- Pas ami avec le receveur
+- Login/Receveur contient une `,`
+- Nous ne sommes pas ami avec le receveur
 
+  
 ```bash
 reponse,envoi_message,login,receveur,erreur
 ```
 
+  <br><br>
 
 ## Récupérer les messages envoyés/reçus
 
@@ -270,7 +287,7 @@ reponse,envoi_message,login,receveur,erreur
 ```bash
 demande_message,login,ami,id
 
-# Exemple pour récupèrer les deux dernières demandes d'ami
+# Exemple pour récupèrer les deux mreiers messages envoyés par ami
 demande_message,login,ami,0
 demande_message,login,ami,1
 ```
@@ -281,7 +298,7 @@ demande_message,login,ami,1
 
 si ok:
 ```bash
-# Suite vaudra oui ou non, il indique si on a une autre demande d'ami après celle la ou pas
+# Suite vaudra oui ou non, il indique si on a d'autre message après celui la
 reponse,demande_message,login,ami,envoyeur,message,suite
 ```
 
@@ -294,8 +311,9 @@ si pas ok:
 reponse,demande_message,login,ami,envoyeur,message,erreur
 ```
 
+  <br><br>
 
-## Gestion de son compte
+## Gestion du compte
 
 ### Suppression du compte
 > **client ➡️ serveur**
@@ -315,8 +333,9 @@ reponse,delete,login,ok
 <br>
 
 si pas ok:
-- Login/Receveur n'existe pas / est vide 
-- Pas ami avec receveur
+- Login n'existe pas / est vide 
+- Password incorrect
+  
 ```bash
 reponse,delete,login,erreur
 ```
