@@ -8,7 +8,7 @@
 Réalisation d'une application client/serveur utilisant les fonctions communicantes permettant de
 concevoir un protocole applicatif au-dessus de la pile de communication TCP/IP.
 
-## Les fonctionalités du serveur seront les suivantes
+## Fonctionnalités principales
 
 1. Le serveur permet de gérer un total de 10 utilisateurs.
 
@@ -35,7 +35,7 @@ ou MESSAGE), par une origine, par le destinataire et par un corps de message.
 
 ## Organisation du travail
 
-Nous étions déjà tous d'accord pour faire du versionnage avec GitHub. Nous avions les repositories déjà créer avant le début de la SAé.
+Nous étions déjà tous d'accord pour faire du versionnage avec GitHub, nous avions donc naturellement déjà créé les différents repos avant le début de la SAé.
 
 Lundi nous avons constituer notre équipe de 4 : Enzo MANZINALI, Bastien LAURENT, Anas IDIRI et Romain MARC.
 La répartition des rôles fut assez rapide à appliqué étant donner que nous étions tous rapidement d'accord sur comment produire le travail demandé. Nous nous sommes tous réunis pour mettre en place le protocol qui sera la colonne vertébrale du projet (*sprint planning*).
